@@ -2,8 +2,10 @@
 
 > 專為實體英語教科書課後複習打造的極簡隨身聽 · 雙欄位純數字輸入 · 手機大數字鍵盤 · GitHub Pages 零配置即開即播
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Online%20(即開即用)-brightgreen?style=for-the-badge&logo=github)](https://vaalrl.github.io/Ki-lin-lok-uan-ka/)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Ready-blue)](https://pages.github.com/)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Active-blue)](https://vaalrl.github.io/Ki-lin-lok-uan-ka/)
 [![Zero Dependencies](https://img.shields.io/badge/Dependencies-0%20(Pure%20Vanilla)-success)](#)
 [![Mobile Optimized](https://img.shields.io/badge/Mobile-iOS%20%2F%20Android-orange)](#)
 
@@ -54,15 +56,10 @@
 
 ## 🚀 快速上手指南 (Quick Start)
 
-### 方式 A：透過 GitHub Pages 部署（全家手機隨開即用）
-
-1. 將本專案 Fork 或 Push 至您的 GitHub 帳號。
-2. 進入該 Repository 的 **Settings** ➔ **Pages**。
-3. 在 **Build and deployment** 下方的 Branch 選擇 `main`，目錄選擇 `/ (root)`，點擊 **Save**。
-4. 約 30 秒後，即可透過專屬網址造訪：
-   ```text
-   https://<您的帳號>.github.io/<專案名>/
-   ```
+### 方式 A：透過 GitHub Pages 直接使用（全家手機隨開即用）
+ 
+- 🌐 **已部屬上線，點擊即用**：[https://vaalrl.github.io/Ki-lin-lok-uan-ka/](https://vaalrl.github.io/Ki-lin-lok-uan-ka/)
+- 本專案已配置 GitHub Pages 自動託管，每次更新 `main` 分支將自動同步最新版本。
 5. **在手機上建立 App 圖示（推薦）**：
    - **iPhone (iOS)**：用 Safari 開啟該網址 ➔ 點擊底部「分享」圖示 ➔ 點選 **「加入主畫面」**。
    - **Android**：用 Chrome 開啟 ➔ 點擊右上角選單 ➔ 點選 **「加到主螢幕」**。
