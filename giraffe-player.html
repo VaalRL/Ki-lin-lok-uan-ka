@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0f172a">
+  <title>麒麟鹿player - 全系列教材隨身聽</title>
+  <style>
+    :root {
+      --primary: #f59e0b;
+      --primary-hover: #d97706;
+      --bg: #0f172a;
+      --card: #1e293b;
+      --card-border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --success: #10b981;
+      --radius: 16px;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 14px 12px 28px 12px;
+    }
+    .container {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    header {
+      text-align: center;
+      padding: 4px 0 6px 0;
+    }
+    header h1 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      letter-spacing: 0.5px;
+    }
+    header p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.35);
+    }
+    .label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    /* Select styling */
+    select.custom-select {
+      width: 100%;
+      background: #0f172a;
+      border: 1.5px solid var(--card-border);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      background-size: 16px;
+    }
+    select.custom-select:focus {
+      border-color: var(--primary);
+    }
+    /* Books Carousel */
+    .books-scroll {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 4px 0 8px 0;
+      scrollbar-width: thin;
+      scrollbar-color: #334155 transparent;
+    }
+    .books-scroll::-webkit-scrollbar {
+      height: 4px;
+    }
+    .books-scroll::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+    .book-chip {
+      flex: 0 0 auto;
+      background: #0f172a;
+      border: 1px solid var(--card-border);
+      color: var(--text);
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .book-chip.active {
+      background: var(--primary);
+      color: #000;
+      border-color: var(--primary);
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+    }
+    /* DUAL SPLIT NUMERIC INPUTS */
+    .dual-input-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+    }
+    .input-box-unit {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .input-subcaption {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-align: center;
+      font-weight: 600;
+    }
+    .num-input {
+      width: 100%;
+      background: #0f172a;
+      border: 2px solid var(--card-border);
+      border-radius: 12px;
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: 800;
+      text-align: center;
+      padding: 10px 4px;
+      outline: none;
+      transition: all 0.2s;
+      caret-color: var(--primary);
+    }
+    .num-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.25);
+    }
+    .input-separator {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--primary);
+      padding: 16px 2px 0 2px;
+      user-select: none;
+    }
+    .play-btn-icon-only {
+      background: var(--primary);
+      color: #000;
+      border: none;
+      border-radius: 12px;
+      width: 52px;
+      height: 52px;
+      font-size: 1.3rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.1s;
+      flex-shrink: 0;
+      margin-top: 18px;
+    }
+    .play-btn-icon-only:active {
+      transform: scale(0.94);
+      background: var(--primary-hover);
+    }
+
+    /* Player Display */
+    .player-display {
+      text-align: center;
+      padding: 4px 0 8px 0;
+    }
+    .now-playing-series {
+      font-size: 0.78rem;
+      color: var(--primary);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .now-playing-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #fff;
+      margin-top: 2px;
+    }
+    .now-playing-sub {
+      font-size: 0.75rem;
+      color: var(--accent);
+      margin-top: 2px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    audio {
+      width: 100%;
+      height: 42px;
+      margin-top: 10px;
+      border-radius: 21px;
+      outline: none;
+    }
+
+    /* ICON-ONLY PLAYBACK CONTROLS BAR */
+    .icon-controls-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin: 14px 0 8px 0;
+    }
+    .icon-ctrl-btn {
+      background: #0f172a;
+      border: 1px solid var(--card-border);
+      color: var(--text);
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      font-size: 1.15rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+    .icon-ctrl-btn:active {
+      background: #334155;
+      transform: scale(0.92);
+    }
+    .icon-ctrl-btn.btn-jump {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--accent);
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+    .main-play-btn {
+      background: var(--primary);
+      color: #000;
+      border: none;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      font-size: 1.45rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 16px rgba(245, 158, 11, 0.4);
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+    .main-play-btn:active {
+      transform: scale(0.92);
+      background: var(--primary-hover);
+    }
+
+    /* OPTIONS BAR: CHECKBOXES + SPEED PILLS */
+    .options-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 4px 4px 4px;
+      border-top: 1px solid rgba(51, 65, 85, 0.5);
+      margin-top: 8px;
+    }
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .icon-checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      user-select: none;
+      font-size: 1.25rem;
+    }
+    .icon-checkbox-label input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+    .speed-pills {
+      display: flex;
+      gap: 6px;
+    }
+    .speed-btn {
+      background: #0f172a;
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 4px 8px;
+      border-radius: 14px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .speed-btn.active {
+      background: var(--accent);
+      color: #000;
+      border-color: var(--accent);
+    }
+
+    /* Direct Link */
+    .link-box {
+      background: #0f172a;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      word-break: break-all;
+      margin-top: 10px;
+      user-select: all;
+    }
+    /* Tracklist Drawer */
+    .drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .tracklist-container {
+      max-height: 240px;
+      overflow-y: auto;
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding-right: 4px;
+    }
+    .track-item {
+      background: #0f172a;
+      border: 1px solid transparent;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .track-item:hover, .track-item:active {
+      background: #1e293b;
+      border-color: var(--primary);
+    }
+    .track-item.active {
+      background: rgba(245, 158, 11, 0.15);
+      border-color: var(--primary);
+      color: var(--primary);
+      font-weight: 700;
+    }
+    .track-search {
+      width: 100%;
+      background: #0f172a;
+      border: 1px solid var(--card-border);
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      outline: none;
+      margin-top: 8px;
+    }
+    /* History */
+    .history-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .chip {
+      background: #0f172a;
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+    .chip:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+    footer {
+      text-align: center;
+      font-size: 0.72rem;
+      color: #64748b;
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .badge-lesson {
+      background: rgba(56, 189, 248, 0.2);
+      color: var(--accent);
+    }
+    .badge-track {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--success);
+    }
+    .loading-spinner {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      padding: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>🦒 麒麟鹿player 全系列隨身聽</h1>
+      <p>課本印幾之幾 · 雙格純數字鍵盤直連 · GitHub Pages 直載</p>
+    </header>
+
+    <!-- 1. 選擇教材系列 -->
+    <div class="card">
+      <div class="label">
+        <span>1. 選擇教材系列 (Series)</span>
+        <span id="series-mode-badge" class="badge badge-lesson">課次型 (雙欄位 X-Y)</span>
+      </div>
+      <select id="series-select" class="custom-select">
+        <!-- 動態分類渲染 -->
+      </select>
+    </div>
+
+    <!-- 2. 選擇書籍冊次 -->
+    <div class="card">
+      <div class="label">
+        <span>2. 選擇書籍 / 冊次 (Book)</span>
+        <span id="book-count-badge" style="color: var(--primary); font-size: 0.75rem;">共 8 冊</span>
+      </div>
+      <div class="books-scroll" id="books-carousel">
+        <!-- 動態冊次按鈕 -->
+      </div>
+    </div>
+
+    <!-- 3. 雙欄位純數字輸入 -->
+    <div class="card">
+      <div class="label">
+        <span>3. 輸入課本標記</span>
+        <span id="input-hint-text" style="font-size: 0.72rem; color: #64748b;">數字鍵盤自動跳格 · 按 ▶ 播放</span>
+      </div>
+      
+      <div class="dual-input-wrapper">
+        <!-- 課次格 -->
+        <div class="input-box-unit" id="lesson-box-unit">
+          <span class="input-subcaption">第幾課 (Lesson)</span>
+          <input type="text" id="lesson-input" class="num-input" value="1" inputmode="numeric" pattern="[0-9]*" maxlength="2" autocomplete="off">
+        </div>
+
+        <!-- 分隔符 -->
+        <div class="input-separator" id="input-separator">—</div>
+
+        <!-- 曲目格 -->
+        <div class="input-box-unit" id="track-box-unit">
+          <span class="input-subcaption" id="track-subcaption">第幾首 (Track)</span>
+          <input type="text" id="track-input" class="num-input" value="1" inputmode="numeric" pattern="[0-9]*" maxlength="3" autocomplete="off">
+        </div>
+
+        <!-- 播放按鈕 (無文字，純圖示) -->
+        <button id="play-submit" class="play-btn-icon-only" title="立即播放">▶</button>
+      </div>
+    </div>
+
+    <!-- 4. 簡化版播放器主控台 (純圖示、-5s/+5s、Checkbox控制) -->
+    <div class="card">
+      <div class="player-display">
+        <div class="now-playing-series" id="display-series">Action Series</div>
+        <div class="now-playing-title" id="display-title">Book 1 · Lesson 1 - Track 1</div>
+        <div class="now-playing-sub" id="display-filename">AC1_1-1.mp3</div>
+        <audio id="audio-player" controls preload="auto" playsinline></audio>
+      </div>
+
+      <!-- 純圖示主控制列 (上一首、-5秒、大播放鍵、+5秒、下一首) -->
+      <div class="icon-controls-bar">
+        <button class="icon-ctrl-btn" id="btn-prev" title="上一首">⏮</button>
+        <button class="icon-ctrl-btn btn-jump" id="btn-rewind-5" title="快退 5 秒">↺5s</button>
+        <button class="main-play-btn" id="btn-play-pause" title="播放 / 暫停">▶</button>
+        <button class="icon-ctrl-btn btn-jump" id="btn-forward-5" title="快進 5 秒">5s↻</button>
+        <button class="icon-ctrl-btn" id="btn-next" title="下一首">⏭</button>
+      </div>
+
+      <!-- Checkbox 控制區 (單曲循環、連續播放) 與 倍速按鈕 -->
+      <div class="options-bar">
+        <div class="checkbox-group">
+          <!-- 循環播放 Checkbox (純圖示) -->
+          <label class="icon-checkbox-label" title="單曲循環">
+            <input type="checkbox" id="loop-checkbox">
+            <span style="font-size: 1.15rem;">🔁</span>
+          </label>
+          <!-- 接續播放 Checkbox (純圖示) -->
+          <label class="icon-checkbox-label" title="連續播放下一首">
+            <input type="checkbox" id="auto-next-checkbox" checked>
+            <span style="font-size: 1.15rem;">⏩</span>
+          </label>
+        </div>
+
+        <div class="speed-pills">
+          <button class="speed-btn" data-speed="0.8">0.8x</button>
+          <button class="speed-btn active" data-speed="1.0">1.0x</button>
+          <button class="speed-btn" data-speed="1.2">1.2x</button>
+        </div>
+      </div>
+
+      <div class="link-box" id="direct-url-box">
+        CDN 串流連結
+      </div>
+    </div>
+
+    <!-- 5. 當前書籍完整曲目清單 (可摺疊/即時檢索) -->
+    <div class="card" style="padding: 12px 16px;">
+      <div class="drawer-header" id="drawer-toggle">
+        <div class="label" style="margin: 0;">
+          <span id="tracklist-title">🎵 本書曲目清單 (載入中...)</span>
+          <span id="drawer-arrow" style="font-size: 0.75rem; color: var(--primary);">▼ 展開</span>
+        </div>
+      </div>
+      <div id="drawer-content" style="display: none; margin-top: 8px;">
+        <input type="text" id="track-search" class="track-search" placeholder="🔍 搜尋曲目關鍵字或編號...">
+        <div class="tracklist-container" id="tracklist-container">
+          <div class="loading-spinner">載入曲目中...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. 最近播放歷程 -->
+    <div class="card" style="padding: 12px 16px;">
+      <div class="label">
+        <span>最近播放歷程</span>
+        <span id="clear-history" style="cursor: pointer; font-size: 0.72rem; color: #ef4444;">清空</span>
+      </div>
+      <div class="history-chips" id="history-chips">
+        <!-- 動態歷史標籤 -->
+      </div>
+    </div>
+
+    <footer>
+      麒麟鹿player 28 系列雲端 CDN 音訊直連微服務 · 純前端原生串流 · 支援 GitHub Pages<br>
+      iPhone / Android 均可點擊「加入主畫面」儲存為專屬 App 圖示
+    </footer>
+  </div>
+
+  <script>
+    // 全站 28 系列教材資料庫
+    const CATALOG = {"HG": {"id": "HG", "title": "Hello Giraffe", "books": ["Book1", "Book2", "Book3", "Book4", "Book5", "Book6", "Book7", "Book8", "Book9", "Book10"]}, "GG": {"id": "GG", "title": "Go! Go! Giraffe", "books": ["Book1", "Book2", "Book3", "Book4", "Book5", "Book6", "Book7", "Book8", "Book9", "Book10"]}, "CP": {"id": "CP", "title": "Caterpillar", "books": ["Book1", "Book2", "Book3", "Book4", "Book5", "Book6", "Book7", "Book8", "Book9", "Book10", "Book11", "Book12"]}, "BG": {"id": "BG", "title": "Bravo Giraffe", "books": ["Book1", "Book2", "Book3", "Book4", "Book5", "Book6", "Book7", "Book8", "Book9", "Book10"]}, "WST": {"id": "WST", "title": "WOW! Starter", "books": ["Book1", "Book2", "Book3"]}, "WLSL1": {"id": "WLSL1", "title": "WOW! Little Sun LV1", "books": ["Book1", "Book2", "Book3", "Book4", "Book5", "Book6", "Book7", "Book8", "Book9", "Book10", "Book11", "Book12"]}, "WLSL2": {"id": "WLSL2", "title": "WOW! Little Sun LV2", "books": ["Book1", "Book2", "Book3", "Book4", "Book5", "Book6", "Book7", "Book8", "Book9", "Book10", "Book11", "Book12"]}, "GP": {"id": "GP", "title": "Giraffe Phonics", "books": ["STUDENTBOOK1", "WORKBOOK1", "STUDENTBOOK2", "WORKBOOK2", "STUDENTBOOK3", "WORKBOOK3", "STUDENTBOOK4", "WORKBOOK4"]}, "GLA": {"id": "GLA", "title": "Giraffeland", "books": ["BOOK1", "BOOK2", "BOOK3", "BOOK4", "BOOK5", "BOOK6", "BOOK7", "BOOK8"]}, "WBSL3": {"id": "WBSL3", "title": "WOW! Big Sky LV3", "books": ["Book1", "Book2", "Book3", "Book4", "Book5", "Book6", "Book7", "Book8", "Book9", "Book10", "Book11", "Book12"]}, "WBSL4": {"id": "WBSL4", "title": "WOW! Big Sky LV4", "books": ["Book1", "Book2", "Book3", "Book4", "Book5", "Book6", "Book7", "Book8", "Book9", "Book10", "Book11", "Book12"]}, "AC": {"id": "AC", "title": "Action", "books": ["BOOK1", "BOOK2", "BOOK3", "BOOK4", "BOOK5", "BOOK6", "BOOK7", "BOOK8"]}, "BP": {"id": "BP", "title": "Bingo Phonics", "books": ["BOOK1", "BOOK2", "BOOK3", "BOOK4"]}, "ST": {"id": "ST", "title": "Stage", "books": ["BOOK1", "BOOK2", "BOOK3", "BOOK4", "BOOK5"]}, "GR": {"id": "GR", "title": "Get Ready", "books": ["BOOK1", "BOOK2", "BOOK3", "BOOK4"]}, "HL": {"id": "HL", "title": "Highlight", "books": ["BOOK1", "BOOK2", "BOOK3", "BOOK4", "BOOK5"]}, "WRYG": {"id": "WRYG", "title": "WOW! Reach Your Goal", "books": ["Book1-CD1", "Book1-CD2", "Book2-CD1", "Book2-CD2", "Book3-CD1", "Book3-CD2", "Book4-CD1", "Book4-CD2", "Book5-CD1", "Book5-CD2", "Book6-CD1", "Book6-CD2", "Book7-CD1", "Book7-CD2", "Book8-CD1", "Book8-CD2", "Book9-CD1", "Book9-CD2", "Book10-CD1", "Book10-CD2", "Book11-CD1", "Book11-CD2", "Book12-CD1", "Book12-CD2"]}, "CF": {"id": "CF", "title": "Children's Favorite Stories", "books": ["Book1", "Book2", "Book3", "Book4", "Book5", "Book6", "Book7", "Book8", "Book9"]}, "MGB": {"id": "MGB", "title": "My G-Book", "books": ["GreenBook", "GreenBookPlayscript", "RedBook", "RedBookPlayscript", "YellowBook", "YellowBookPlayscript", "OrangeBook", "OrangeBookPlayscript"]}, "KK": {"id": "KK", "title": "KK", "books": ["STUDENTBOOK", "WORKBOOK"]}, "TAR": {"id": "TAR", "title": "The Amazing Race", "books": ["BOOK"]}, "PZ": {"id": "PZ", "title": "Phono Zoo", "books": ["BOOK"]}, "TK": {"id": "TK", "title": "Twinkle", "books": ["BookG1-CD1", "BookG1-CD2", "BookG1-CD3", "BookG1-CD4", "BookG1-CD5", "BookG2-CD1", "BookG2-CD2", "BookG2-CD3", "BookG2-CD4", "BookG2-CD5", "BookG3-CD1", "BookG3-CD2", "BookG3-CD3", "BookG3-CD4", "BookG3-CD5", "BookG4-CD1", "BookG4-CD2", "BookG4-CD3", "BookG4-CD4", "BookG4-CD5", "BookG5-CD1", "BookG5-CD2", "BookG5-CD3", "BookG5-CD4", "BookG5-CD5", "BookG6-CD1", "BookG6-CD2", "BookG6-CD3", "BookG6-CD4", "BookG6-CD5"]}, "GL": {"id": "GL", "title": "Giraffe Leaders", "books": ["Book1", "Book2", "Book3"]}, "MyABC": {"id": "MyABC", "title": "My ABC", "books": ["STUDENTBOOK1", "WORKBOOK1", "STUDENTBOOK2", "WORKBOOK2"]}, "My123": {"id": "My123", "title": "My 123", "books": ["BOOK1", "BOOK2"]}, "TISW": {"id": "TISW", "title": "The Incredible Science World", "books": ["Book"]}, "SDG": {"id": "SDG", "title": "My SDG Adventure", "books": ["Book"]}};
+    const CATEGORIES = [{"category": "🌟 旗艦主教材 (含課次與單元)", "series": ["AC", "BP", "ST", "HL", "GR"]}, {"category": "👶 幼兒啟蒙與國小初階", "series": ["HG", "GG", "CP", "BG", "WST", "WLSL1", "WLSL2", "GLA"]}, {"category": "🚀 進階少兒、國中與挑戰", "series": ["WBSL3", "WBSL4", "WRYG", "TK", "GL"]}, {"category": "📚 自然發音、繪本與科普主題", "series": ["GP", "CF", "MGB", "KK", "MyABC", "My123", "TISW", "SDG", "TAR", "PZ"]}];
+
+    // 課次型教材判定集合 (有 Lesson-Track 雙層編號)
+    const LESSON_BASED_SERIES = new Set(["AC", "BP", "ST", "HL"]);
+
+    // Action 8 冊 22 課完整曲目上限字典
+    const ACTION_LIMITS = {
+      1: {"1": 11, "2": 9, "3": 6, "4": 9, "5": 9, "6": 7, "7": 10, "8": 10, "9": 7, "10": 3, "11": 10, "12": 10, "13": 7, "14": 10, "15": 10, "16": 7, "17": 10, "18": 10, "19": 7, "20": 3, "21": 4, "22": 2},
+      2: {"1": 8, "2": 8, "3": 6, "4": 8, "5": 8, "6": 6, "7": 8, "8": 8, "9": 6, "10": 2, "11": 8, "12": 8, "13": 5, "14": 8, "15": 8, "16": 5, "17": 8, "18": 8, "19": 5, "20": 2, "21": 2, "22": 3},
+      3: {"1": 9, "2": 7, "3": 6, "4": 8, "5": 9, "6": 6, "7": 8, "8": 8, "9": 6, "10": 2, "11": 8, "12": 8, "13": 6, "14": 8, "15": 7, "16": 6, "17": 8, "18": 8, "19": 6, "20": 3, "21": 2, "22": 3},
+      4: {"1": 9, "2": 8, "3": 5, "4": 8, "5": 7, "6": 6, "7": 8, "8": 8, "9": 7, "10": 3, "11": 8, "12": 7, "13": 7, "14": 8, "15": 8, "16": 6, "17": 8, "18": 9, "19": 6, "20": 3, "21": 2, "22": 3},
+      5: {"1": 7, "2": 6, "3": 6, "4": 6, "5": 6, "6": 6, "7": 6, "8": 6, "9": 6, "10": 3, "11": 6, "12": 6, "13": 5, "14": 5, "15": 6, "16": 7, "17": 6, "18": 6, "19": 6, "20": 3, "21": 2, "22": 3},
+      6: {"1": 7, "2": 6, "3": 6, "4": 6, "5": 6, "6": 6, "7": 6, "8": 6, "9": 6, "10": 3, "11": 6, "12": 6, "13": 6, "14": 6, "15": 6, "16": 6, "17": 6, "18": 6, "19": 6, "20": 3, "21": 2, "22": 2},
+      7: {"1": 7, "2": 6, "3": 6, "4": 6, "5": 5, "6": 6, "7": 6, "8": 5, "9": 6, "10": 3, "11": 6, "12": 6, "13": 7, "14": 6, "15": 6, "16": 6, "17": 6, "18": 6, "19": 6, "20": 3, "21": 2, "22": 2},
+      8: {"1": 7, "2": 6, "3": 6, "4": 6, "5": 6, "6": 6, "7": 6, "8": 6, "9": 6, "10": 3, "11": 6, "12": 6, "13": 6, "14": 6, "15": 6, "16": 6, "17": 6, "18": 6, "19": 6, "20": 3, "21": 2, "22": 2}
+    };
+
+    // 當前狀態
+    let currentSeries = "AC";
+    let currentBookId = "BOOK1";
+    let currentTrackIndex = 0;
+    let currentTracks = [];
+    let isLoop = false;
+    let isAutoNext = true;
+    let playHistory = [];
+
+    // DOM 節點
+    const seriesSelect = document.getElementById("series-select");
+    const booksCarousel = document.getElementById("books-carousel");
+    const seriesModeBadge = document.getElementById("series-mode-badge");
+    const bookCountBadge = document.getElementById("book-count-badge");
+    const lessonBoxUnit = document.getElementById("lesson-box-unit");
+    const inputSeparator = document.getElementById("input-separator");
+    const trackBoxUnit = document.getElementById("track-box-unit");
+    const trackSubcaption = document.getElementById("track-subcaption");
+    const lessonInput = document.getElementById("lesson-input");
+    const trackInput = document.getElementById("track-input");
+    const displaySeries = document.getElementById("display-series");
+    const displayTitle = document.getElementById("display-title");
+    const displayFilename = document.getElementById("display-filename");
+    const directUrlBox = document.getElementById("direct-url-box");
+    const audio = document.getElementById("audio-player");
+    const btnPlayPause = document.getElementById("btn-play-pause");
+    const loopCheckbox = document.getElementById("loop-checkbox");
+    const autoNextCheckbox = document.getElementById("auto-next-checkbox");
+    const historyChips = document.getElementById("history-chips");
+    const drawerToggle = document.getElementById("drawer-toggle");
+    const drawerContent = document.getElementById("drawer-content");
+    const drawerArrow = document.getElementById("drawer-arrow");
+    const tracklistTitle = document.getElementById("tracklist-title");
+    const tracklistContainer = document.getElementById("tracklist-container");
+    const trackSearch = document.getElementById("track-search");
+
+    // 初始化
+    window.addEventListener("DOMContentLoaded", () => {
+      renderSeriesDropdown();
+      loadSavedHistory();
+
+      const params = new URLSearchParams(window.location.search);
+      const s = params.get("s") || params.get("series");
+      const b = params.get("b") || params.get("book");
+      const t = params.get("t") || params.get("track");
+
+      const savedSeries = localStorage.getItem("g_series");
+      const savedBook = localStorage.getItem("g_book");
+
+      if (s && CATALOG[s]) {
+        currentSeries = s;
+      } else if (savedSeries && CATALOG[savedSeries]) {
+        currentSeries = savedSeries;
+      }
+
+      seriesSelect.value = currentSeries;
+      updateSeriesModeUI();
+      renderBooksCarousel();
+
+      if (b && CATALOG[currentSeries].books.includes(b)) {
+        currentBookId = b;
+      } else if (savedBook && CATALOG[currentSeries].books.includes(savedBook)) {
+        currentBookId = savedBook;
+      } else {
+        currentBookId = CATALOG[currentSeries].books[0];
+      }
+
+      updateActiveBookChip();
+
+      loadBookTracks(currentSeries, currentBookId, () => {
+        if (t) {
+          findAndPlayTrackByCode(t, false);
+        } else {
+          const savedTrack = localStorage.getItem("g_track_combined");
+          if (savedTrack) {
+            findAndPlayTrackByCode(savedTrack, false);
+          } else if (currentTracks.length > 0) {
+            playTrackByIndex(0, false);
+          }
+        }
+      });
+
+      setupInputBehaviors();
+      setupPlaybackControls();
+    });
+
+    // 設定大數字鍵盤與自動跳格
+    function setupInputBehaviors() {
+      lessonInput.addEventListener("focus", function() { this.select(); });
+      trackInput.addEventListener("focus", function() { this.select(); });
+
+      lessonInput.addEventListener("input", function() {
+        const val = this.value.replace(/[^0-9]/g, "");
+        this.value = val;
+        if (val.length === 2 || (val.length === 1 && parseInt(val) >= 3)) {
+          trackInput.focus();
+          trackInput.select();
+        }
+      });
+
+      lessonInput.addEventListener("keydown", function(e) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          trackInput.focus();
+          trackInput.select();
+        }
+      });
+
+      trackInput.addEventListener("input", function() {
+        this.value = this.value.replace(/[^0-9]/g, "");
+      });
+
+      trackInput.addEventListener("keydown", function(e) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          submitInputsAndPlay();
+        }
+      });
+
+      document.getElementById("play-submit").addEventListener("click", submitInputsAndPlay);
+    }
+
+    // 設定純圖示控制按鈕與 Checkbox
+    function setupPlaybackControls() {
+      // 主播放/暫停鍵
+      btnPlayPause.addEventListener("click", () => {
+        if (audio.paused) {
+          audio.play().catch(e => console.log("Play gesture required:", e));
+        } else {
+          audio.pause();
+        }
+      });
+
+      // 音訊播放狀態事件同步按鈕圖示
+      audio.addEventListener("play", () => {
+        btnPlayPause.textContent = "⏸";
+      });
+      audio.addEventListener("pause", () => {
+        btnPlayPause.textContent = "▶";
+      });
+
+      // 快退 5 秒 (↺5s)
+      document.getElementById("btn-rewind-5").addEventListener("click", () => {
+        audio.currentTime = Math.max(0, audio.currentTime - 5);
+      });
+
+      // 快進 5 秒 (5s↻)
+      document.getElementById("btn-forward-5").addEventListener("click", () => {
+        audio.currentTime = Math.min(audio.duration || 9999, audio.currentTime + 5);
+      });
+
+      // 上一首
+      document.getElementById("btn-prev").addEventListener("click", () => {
+        if (currentTrackIndex > 0) {
+          playTrackByIndex(currentTrackIndex - 1, true);
+        } else {
+          stepBook(-1);
+        }
+      });
+
+      // 下一首
+      document.getElementById("btn-next").addEventListener("click", () => {
+        stepNext();
+      });
+
+      // 循環播放 Checkbox (控制 audio.loop)
+      loopCheckbox.addEventListener("change", () => {
+        isLoop = loopCheckbox.checked;
+        audio.loop = isLoop;
+      });
+
+      // 接續播放 Checkbox (控制播放結束自動跳下一首)
+      autoNextCheckbox.addEventListener("change", () => {
+        isAutoNext = autoNextCheckbox.checked;
+      });
+
+      // 音訊結束事件
+      audio.addEventListener("ended", () => {
+        if (isLoop) {
+          audio.currentTime = 0;
+          audio.play();
+        } else if (isAutoNext) {
+          stepNext();
+        }
+      });
+
+      // 倍速切換
+      document.querySelectorAll(".speed-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".speed-btn").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          audio.playbackRate = parseFloat(btn.dataset.speed);
+        });
+      });
+    }
+
+    // 渲染系列選單
+    function renderSeriesDropdown() {
+      seriesSelect.innerHTML = "";
+      CATEGORIES.forEach(group => {
+        const optgroup = document.createElement("optgroup");
+        optgroup.label = group.category;
+        group.series.forEach(sid => {
+          if (CATALOG[sid]) {
+            const opt = document.createElement("option");
+            opt.value = sid;
+            opt.textContent = `${CATALOG[sid].title} (${CATALOG[sid].books.length} 冊)`;
+            optgroup.appendChild(opt);
+          }
+        });
+        seriesSelect.appendChild(optgroup);
+      });
+    }
+
+    seriesSelect.addEventListener("change", () => {
+      currentSeries = seriesSelect.value;
+      localStorage.setItem("g_series", currentSeries);
+      updateSeriesModeUI();
+      renderBooksCarousel();
+      currentBookId = CATALOG[currentSeries].books[0];
+      updateActiveBookChip();
+      loadBookTracks(currentSeries, currentBookId, () => {
+        if (currentTracks.length > 0) {
+          playTrackByIndex(0, true);
+        }
+      });
+    });
+
+    function updateSeriesModeUI() {
+      const isLesson = LESSON_BASED_SERIES.has(currentSeries);
+      if (isLesson) {
+        seriesModeBadge.className = "badge badge-lesson";
+        seriesModeBadge.textContent = "課次型 (雙欄位 X-Y)";
+        lessonBoxUnit.style.display = "flex";
+        inputSeparator.style.display = "block";
+        trackSubcaption.textContent = "第幾首 (Track)";
+      } else {
+        seriesModeBadge.className = "badge badge-track";
+        seriesModeBadge.textContent = "曲目型 (單欄位 Track)";
+        lessonBoxUnit.style.display = "none";
+        inputSeparator.style.display = "none";
+        trackSubcaption.textContent = "音軌序號 (Track)";
+      }
+      displaySeries.textContent = CATALOG[currentSeries].title;
+    }
+
+    function renderBooksCarousel() {
+      booksCarousel.innerHTML = "";
+      const books = CATALOG[currentSeries].books;
+      bookCountBadge.textContent = `共 ${books.length} 冊/CD`;
+
+      books.forEach(bId => {
+        const chip = document.createElement("button");
+        chip.className = "book-chip";
+        chip.dataset.book = bId;
+        chip.textContent = formatBookTitle(bId);
+        chip.addEventListener("click", () => {
+          currentBookId = bId;
+          updateActiveBookChip();
+          loadBookTracks(currentSeries, currentBookId, () => {
+            if (currentTracks.length > 0) {
+              playTrackByIndex(0, true);
+            }
+          });
+        });
+        booksCarousel.appendChild(chip);
+      });
+    }
+
+    function formatBookTitle(bId) {
+      return bId.replace("BOOK", "Book ").replace("Book", "B").replace("STUDENTBOOK", "SB ").replace("WORKBOOK", "WB ").replace("Playscript", " Play");
+    }
+
+    function updateActiveBookChip() {
+      document.querySelectorAll(".book-chip").forEach(chip => {
+        chip.classList.toggle("active", chip.dataset.book === currentBookId);
+      });
+      localStorage.setItem("g_book", currentBookId);
+    }
+
+    function loadBookTracks(sid, bid, callback) {
+      tracklistTitle.textContent = `🎵 ${formatBookTitle(bid)} 曲目清單 (讀取中...)`;
+      tracklistContainer.innerHTML = '<div class="loading-spinner">正向雲端微服務檢索音軌清單...</div>';
+
+      const apiUrl = `https://api01.giraffe.com.tw/api/MP3/tracks-by-bookId?seriesid=${sid}&bookid=${bid}`;
+
+      fetch(apiUrl)
+        .then(res => res.json())
+        .then(data => {
+          if (data && data.data && data.data.length > 0) {
+            currentTracks = data.data;
+          } else {
+            if (sid === "AC") {
+              currentTracks = generateActionFallbackTracks(bid);
+            } else {
+              currentTracks = [];
+            }
+          }
+          tracklistTitle.textContent = `🎵 ${formatBookTitle(bid)} 曲目清單 (${currentTracks.length} 首)`;
+          renderTracklist();
+          if (callback) callback();
+        })
+        .catch(err => {
+          console.warn("API 連線失敗，啟動本地退路:", err);
+          if (sid === "AC") {
+            currentTracks = generateActionFallbackTracks(bid);
+          } else {
+            currentTracks = [];
+          }
+          tracklistTitle.textContent = `🎵 ${formatBookTitle(bid)} 曲目清單 (${currentTracks.length} 首)`;
+          renderTracklist();
+          if (callback) callback();
+        });
+    }
+
+    function generateActionFallbackTracks(bid) {
+      const bNum = parseInt(bid.replace("BOOK", "")) || 1;
+      const limits = ACTION_LIMITS[bNum] || {};
+      const list = [];
+      let trkId = 1;
+      for (let l = 1; l <= 22; l++) {
+        const maxT = limits[l] || 5;
+        for (let t = 1; t <= maxT; t++) {
+          list.push({
+            trackId: trkId++,
+            trackName: `Lesson ${l} Track ${t}`,
+            bookName: bid,
+            audio: `https://geo.giraffe.com.tw/Content/GiraffeMP3/Action/BOOK%20${bNum}/AC${bNum}_${l}-${t}.mp3`
+          });
+        }
+      }
+      return list;
+    }
+
+    function renderTracklist(filterKeyword = "") {
+      tracklistContainer.innerHTML = "";
+      if (currentTracks.length === 0) {
+        tracklistContainer.innerHTML = '<div class="loading-spinner">暫無音軌資料</div>';
+        return;
+      }
+
+      currentTracks.forEach((t, idx) => {
+        const title = t.trackName || `Track ${idx + 1}`;
+        const fn = (t.audio || "").split("/").pop();
+        if (filterKeyword && !title.toLowerCase().includes(filterKeyword.toLowerCase()) && !fn.toLowerCase().includes(filterKeyword.toLowerCase())) {
+          return;
+        }
+
+        const item = document.createElement("div");
+        item.className = `track-item ${idx === currentTrackIndex ? 'active' : ''}`;
+        item.dataset.index = idx;
+        item.innerHTML = `
+          <span>${title}</span>
+          <span style="font-size:0.72rem; color:var(--text-muted);">${fn}</span>
+        `;
+        item.addEventListener("click", () => {
+          playTrackByIndex(idx, true);
+        });
+        tracklistContainer.appendChild(item);
+      });
+    }
+
+    function playTrackByIndex(idx, shouldPlay = true) {
+      if (idx < 0 || idx >= currentTracks.length) return;
+      currentTrackIndex = idx;
+      const t = currentTracks[idx];
+      const fn = (t.audio || "").split("/").pop();
+
+      displayTitle.textContent = `${formatBookTitle(currentBookId)} · ${t.trackName}`;
+      displayFilename.textContent = fn;
+      directUrlBox.textContent = t.audio;
+
+      if (LESSON_BASED_SERIES.has(currentSeries)) {
+        const match = fn.match(/_(\d+)-(\d+)\.mp3$/);
+        if (match) {
+          lessonInput.value = match[1];
+          trackInput.value = match[2];
+          localStorage.setItem("g_track_combined", `${match[1]}-${match[2]}`);
+        }
+      } else {
+        trackInput.value = `${idx + 1}`;
+        localStorage.setItem("g_track_combined", `${idx + 1}`);
+      }
+
+      document.querySelectorAll(".track-item").forEach(el => {
+        el.classList.toggle("active", parseInt(el.dataset.index) === idx);
+      });
+
+      audio.src = t.audio;
+      if (shouldPlay) {
+        audio.play().catch(e => console.log("Auto-play awaiting gesture:", e));
+      }
+
+      const historyLabel = LESSON_BASED_SERIES.has(currentSeries) 
+        ? `${currentSeries} ${formatBookTitle(currentBookId)} [${lessonInput.value}-${trackInput.value}]`
+        : `${currentSeries} ${formatBookTitle(currentBookId)} [#${trackInput.value}]`;
+
+      addHistory(historyLabel);
+    }
+
+    function submitInputsAndPlay() {
+      if (LESSON_BASED_SERIES.has(currentSeries)) {
+        const l = lessonInput.value.trim();
+        const tr = trackInput.value.trim();
+        if (!l || !tr) {
+          alert("請輸入課次與曲目（純數字）");
+          return;
+        }
+        const pattern = new RegExp(`_${l}-${tr}\.mp3$`, "i");
+        const idx = currentTracks.findIndex(t => pattern.test(t.audio));
+        if (idx !== -1) {
+          playTrackByIndex(idx, true);
+        } else if (currentSeries === "AC") {
+          // 本機 file:/// 或無網路環境下直接合成 CDN 音訊 URL
+          const bNum = parseInt(currentBookId.replace("BOOK", "")) || 1;
+          const fn = `AC${bNum}_${l}-${tr}.mp3`;
+          const directUrl = `https://geo.giraffe.com.tw/Content/GiraffeMP3/Action/BOOK%20${bNum}/${fn}`;
+          displayTitle.textContent = `${formatBookTitle(currentBookId)} · Lesson ${l} - Track ${tr}`;
+          displayFilename.textContent = fn;
+          directUrlBox.textContent = directUrl;
+          audio.src = directUrl;
+          audio.play().catch(e => console.log("Awaiting user gesture:", e));
+          addHistory(`AC ${formatBookTitle(currentBookId)} [${l}-${tr}]`);
+        } else {
+          alert(`未在本書中找到第 ${l} 課第 ${tr} 首，請確認編號`);
+        }
+      } else {
+        const tr = parseInt(trackInput.value.trim());
+        if (!isNaN(tr) && tr >= 1 && tr <= currentTracks.length) {
+          playTrackByIndex(tr - 1, true);
+        } else {
+          alert(`請輸入 1 到 ${currentTracks.length} 之間的數字`);
+        }
+      }
+    }
+
+    function stepNext() {
+      if (currentTrackIndex < currentTracks.length - 1) {
+        playTrackByIndex(currentTrackIndex + 1, true);
+      } else {
+        stepBook(1);
+      }
+    }
+
+    function stepBook(delta) {
+      const books = CATALOG[currentSeries].books;
+      const bIdx = books.indexOf(currentBookId);
+      const nextBIdx = bIdx + delta;
+      if (nextBIdx >= 0 && nextBIdx < books.length) {
+        currentBookId = books[nextBIdx];
+        updateActiveBookChip();
+        loadBookTracks(currentSeries, currentBookId, () => {
+          const targetIdx = delta > 0 ? 0 : currentTracks.length - 1;
+          playTrackByIndex(targetIdx, true);
+        });
+      }
+    }
+
+    // 摺疊抽屜
+    drawerToggle.addEventListener("click", () => {
+      const isOpen = drawerContent.style.display === "block";
+      drawerContent.style.display = isOpen ? "none" : "block";
+      drawerArrow.textContent = isOpen ? "▼ 展開" : "▲ 收合";
+    });
+
+    trackSearch.addEventListener("input", (e) => {
+      renderTracklist(e.target.value);
+    });
+
+    // 歷程紀錄
+    function addHistory(item) {
+      playHistory = playHistory.filter(x => x !== item);
+      playHistory.unshift(item);
+      if (playHistory.length > 8) playHistory.pop();
+      localStorage.setItem("g_history_v4", JSON.stringify(playHistory));
+      renderHistory();
+    }
+
+    function loadSavedHistory() {
+      const saved = localStorage.getItem("g_history_v4");
+      if (saved) {
+        try { playHistory = JSON.parse(saved); } catch(e){}
+      }
+      renderHistory();
+    }
+
+    function renderHistory() {
+      historyChips.innerHTML = "";
+      if (playHistory.length === 0) {
+        historyChips.innerHTML = "<span style='font-size:0.72rem; color:#64748b;'>尚無播放紀錄</span>";
+        return;
+      }
+      playHistory.forEach(item => {
+        const chip = document.createElement("span");
+        chip.className = "chip";
+        chip.textContent = item;
+        chip.addEventListener("click", () => {
+          const match = item.match(/^(\w+)\s+([^\s]+)\s+\[(.*?)\]$/);
+          if (match) {
+            const s = match[1];
+            const code = match[3].replace("#", "");
+            if (CATALOG[s]) {
+              currentSeries = s;
+              seriesSelect.value = s;
+              updateSeriesModeUI();
+              renderBooksCarousel();
+              loadBookTracks(currentSeries, currentBookId, () => {
+                findAndPlayTrackByCode(code, true);
+              });
+            }
+          }
+        });
+        historyChips.appendChild(chip);
+      });
+    }
+
+    function findAndPlayTrackByCode(code, shouldPlay = true) {
+      if (LESSON_BASED_SERIES.has(currentSeries)) {
+        const m = code.match(/^(\d+)[-\s_.]+(\d+)$/);
+        if (m) {
+          const l = m[1];
+          const tr = m[2];
+          lessonInput.value = l;
+          trackInput.value = tr;
+          const pattern = new RegExp(`_${l}-${tr}\.mp3$`, "i");
+          const idx = currentTracks.findIndex(t => pattern.test(t.audio));
+          if (idx !== -1) {
+            playTrackByIndex(idx, shouldPlay);
+            return;
+          }
+        }
+      } else {
+        const num = parseInt(code);
+        if (!isNaN(num) && num >= 1 && num <= currentTracks.length) {
+          trackInput.value = num;
+          playTrackByIndex(num - 1, shouldPlay);
+          return;
+        }
+      }
+      if (currentTracks.length > 0) {
+        playTrackByIndex(0, shouldPlay);
+      }
+    }
+
+    document.getElementById("clear-history").addEventListener("click", () => {
+      playHistory = [];
+      localStorage.removeItem("g_history_v4");
+      renderHistory();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1303 @@
+[
+  {
+    "seriesId": "HG",
+    "title": "Hello Giraffe",
+    "cover": "https://geo.giraffe.com.tw/Content/SeriesCover/HG.png",
+    "books": [
+      {
+        "bookId": "Book1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book3",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book4",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book5",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book6",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book7",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book8",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book9",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book10",
+        "title": null,
+        "cover": null
+      }
+    ]
+  },
+  {
+    "seriesId": "GG",
+    "title": "Go! Go! Giraffe",
+    "cover": "https://geo.giraffe.com.tw/Content/SeriesCover/GG.png",
+    "books": [
+      {
+        "bookId": "Book1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book3",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book4",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book5",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book6",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book7",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book8",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book9",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book10",
+        "title": null,
+        "cover": null
+      }
+    ]
+  },
+  {
+    "seriesId": "CP",
+    "title": "Caterpillar",
+    "cover": "https://geo.giraffe.com.tw/Content/SeriesCover/CP.png",
+    "books": [
+      {
+        "bookId": "Book1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book3",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book4",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book5",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book6",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book7",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book8",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book9",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book10",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book11",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book12",
+        "title": null,
+        "cover": null
+      }
+    ]
+  },
+  {
+    "seriesId": "BG",
+    "title": "Bravo Giraffe",
+    "cover": "https://geo.giraffe.com.tw/Content/SeriesCover/BG.png",
+    "books": [
+      {
+        "bookId": "Book1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book3",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book4",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book5",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book6",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book7",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book8",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book9",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book10",
+        "title": null,
+        "cover": null
+      }
+    ]
+  },
+  {
+    "seriesId": "WST",
+    "title": "WOW! Starter",
+    "cover": "https://geo.giraffe.com.tw/Content/SeriesCover/WS.png",
+    "books": [
+      {
+        "bookId": "Book1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book3",
+        "title": null,
+        "cover": null
+      }
+    ]
+  },
+  {
+    "seriesId": "WLSL1",
+    "title": "WOW! Little Sun LV1",
+    "cover": "https://geo.giraffe.com.tw/Content/SeriesCover/WLS1.png",
+    "books": [
+      {
+        "bookId": "Book1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book3",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book4",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book5",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book6",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book7",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book8",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book9",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book10",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book11",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book12",
+        "title": null,
+        "cover": null
+      }
+    ]
+  },
+  {
+    "seriesId": "WLSL2",
+    "title": "WOW! Little Sun LV2",
+    "cover": "https://geo.giraffe.com.tw/Content/SeriesCover/WLS2.png",
+    "books": [
+      {
+        "bookId": "Book1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book3",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book4",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book5",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book6",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book7",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book8",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book9",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book10",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book11",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book12",
+        "title": null,
+        "cover": null
+      }
+    ]
+  },
+  {
+    "seriesId": "GP",
+    "title": "Giraffe Phonics",
+    "cover": "https://geo.giraffe.com.tw/Content/SeriesCover/GP.png",
+    "books": [
+      {
+        "bookId": "STUDENTBOOK1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "WORKBOOK1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "STUDENTBOOK2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "WORKBOOK2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "STUDENTBOOK3",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "WORKBOOK3",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "STUDENTBOOK4",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "WORKBOOK4",
+        "title": null,
+        "cover": null
+      }
+    ]
+  },
+  {
+    "seriesId": "GLA",
+    "title": "Giraffeland",
+    "cover": "https://geo.giraffe.com.tw/Content/SeriesCover/GLA.png",
+    "books": [
+      {
+        "bookId": "BOOK1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK3",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK4",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK5",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK6",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK7",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK8",
+        "title": null,
+        "cover": null
+      }
+    ]
+  },
+  {
+    "seriesId": "WBSL3",
+    "title": "WOW! Big Sky LV3",
+    "cover": "https://geo.giraffe.com.tw/Content/SeriesCover/WBKL3.png",
+    "books": [
+      {
+        "bookId": "Book1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book3",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book4",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book5",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book6",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book7",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book8",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book9",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book10",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book11",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book12",
+        "title": null,
+        "cover": null
+      }
+    ]
+  },
+  {
+    "seriesId": "WBSL4",
+    "title": "WOW! Big Sky LV4",
+    "cover": "https://geo.giraffe.com.tw/Content/SeriesCover/WBKL4.png",
+    "books": [
+      {
+        "bookId": "Book1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book3",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book4",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book5",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book6",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book7",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book8",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book9",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book10",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book11",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book12",
+        "title": null,
+        "cover": null
+      }
+    ]
+  },
+  {
+    "seriesId": "AC",
+    "title": "Action",
+    "cover": "https://geo.giraffe.com.tw/Content/SeriesCover/AC.png",
+    "books": [
+      {
+        "bookId": "BOOK1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK3",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK4",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK5",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK6",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK7",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK8",
+        "title": null,
+        "cover": null
+      }
+    ]
+  },
+  {
+    "seriesId": "BP",
+    "title": "Bingo Phonics",
+    "cover": "https://geo.giraffe.com.tw/Content/SeriesCover/BP.png",
+    "books": [
+      {
+        "bookId": "BOOK1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK3",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK4",
+        "title": null,
+        "cover": null
+      }
+    ]
+  },
+  {
+    "seriesId": "ST",
+    "title": "Stage",
+    "cover": "",
+    "books": [
+      {
+        "bookId": "BOOK1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK3",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK4",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK5",
+        "title": null,
+        "cover": null
+      }
+    ]
+  },
+  {
+    "seriesId": "GR",
+    "title": "Get Ready",
+    "cover": "",
+    "books": [
+      {
+        "bookId": "BOOK1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK3",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK4",
+        "title": null,
+        "cover": null
+      }
+    ]
+  },
+  {
+    "seriesId": "HL",
+    "title": "Highlight",
+    "cover": "",
+    "books": [
+      {
+        "bookId": "BOOK1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK3",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK4",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK5",
+        "title": null,
+        "cover": null
+      }
+    ]
+  },
+  {
+    "seriesId": "WRYG",
+    "title": "WOW! Reach Your Goal",
+    "cover": "https://geo.giraffe.com.tw/Content/SeriesCover/WRYG.png",
+    "books": [
+      {
+        "bookId": "Book1-CD1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book1-CD2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book2-CD1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book2-CD2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book3-CD1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book3-CD2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book4-CD1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book4-CD2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book5-CD1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book5-CD2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book6-CD1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book6-CD2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book7-CD1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book7-CD2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book8-CD1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book8-CD2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book9-CD1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book9-CD2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book10-CD1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book10-CD2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book11-CD1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book11-CD2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book12-CD1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book12-CD2",
+        "title": null,
+        "cover": null
+      }
+    ]
+  },
+  {
+    "seriesId": "CF",
+    "title": "Children's Favorite Stories",
+    "cover": "https://geo.giraffe.com.tw/Content/SeriesCover/CF.png",
+    "books": [
+      {
+        "bookId": "Book1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book3",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book4",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book5",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book6",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book7",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book8",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book9",
+        "title": null,
+        "cover": null
+      }
+    ]
+  },
+  {
+    "seriesId": "MGB",
+    "title": "My G-Book",
+    "cover": "https://geo.giraffe.com.tw/Content/SeriesCover/MGB.png",
+    "books": [
+      {
+        "bookId": "GreenBook",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "GreenBookPlayscript",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "RedBook",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "RedBookPlayscript",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "YellowBook",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "YellowBookPlayscript",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "OrangeBook",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "OrangeBookPlayscript",
+        "title": null,
+        "cover": null
+      }
+    ]
+  },
+  {
+    "seriesId": "KK",
+    "title": "KK",
+    "cover": "https://geo.giraffe.com.tw/Content/SeriesCover/KK.png",
+    "books": [
+      {
+        "bookId": "STUDENTBOOK",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "WORKBOOK",
+        "title": null,
+        "cover": null
+      }
+    ]
+  },
+  {
+    "seriesId": "TAR",
+    "title": "The Amazing Race",
+    "cover": "https://geo.giraffe.com.tw/Content/SeriesCover/TAR.png",
+    "books": [
+      {
+        "bookId": "BOOK",
+        "title": null,
+        "cover": null
+      }
+    ]
+  },
+  {
+    "seriesId": "PZ",
+    "title": "Phono Zoo",
+    "cover": "https://geo.giraffe.com.tw/Content/SeriesCover/PZ.png",
+    "books": [
+      {
+        "bookId": "BOOK",
+        "title": null,
+        "cover": null
+      }
+    ]
+  },
+  {
+    "seriesId": "TK",
+    "title": "Twinkle",
+    "cover": "https://geo.giraffe.com.tw/Content/SeriesCover/TK.png",
+    "books": [
+      {
+        "bookId": "BookG1-CD1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG1-CD2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG1-CD3",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG1-CD4",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG1-CD5",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG2-CD1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG2-CD2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG2-CD3",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG2-CD4",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG2-CD5",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG3-CD1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG3-CD2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG3-CD3",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG3-CD4",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG3-CD5",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG4-CD1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG4-CD2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG4-CD3",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG4-CD4",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG4-CD5",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG5-CD1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG5-CD2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG5-CD3",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG5-CD4",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG5-CD5",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG6-CD1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG6-CD2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG6-CD3",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG6-CD4",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BookG6-CD5",
+        "title": null,
+        "cover": null
+      }
+    ]
+  },
+  {
+    "seriesId": "GL",
+    "title": "Giraffe Leaders",
+    "cover": "https://geo.giraffe.com.tw/Content/SeriesCover/GL.png",
+    "books": [
+      {
+        "bookId": "Book1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "Book3",
+        "title": null,
+        "cover": null
+      }
+    ]
+  },
+  {
+    "seriesId": "MyABC",
+    "title": "My ABC",
+    "cover": "https://geo.giraffe.com.tw/Content/SeriesCover/MyABC.png",
+    "books": [
+      {
+        "bookId": "STUDENTBOOK1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "WORKBOOK1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "STUDENTBOOK2",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "WORKBOOK2",
+        "title": null,
+        "cover": null
+      }
+    ]
+  },
+  {
+    "seriesId": "My123",
+    "title": "My 123",
+    "cover": "https://geo.giraffe.com.tw/Content/SeriesCover/My123.png",
+    "books": [
+      {
+        "bookId": "BOOK1",
+        "title": null,
+        "cover": null
+      },
+      {
+        "bookId": "BOOK2",
+        "title": null,
+        "cover": null
+      }
+    ]
+  },
+  {
+    "seriesId": "TISW",
+    "title": "The Incredible Science World",
+    "cover": "",
+    "books": [
+      {
+        "bookId": "Book",
+        "title": null,
+        "cover": null
+      }
+    ]
+  },
+  {
+    "seriesId": "SDG",
+    "title": "My SDG Adventure",
+    "cover": "",
+    "books": [
+      {
+        "bookId": "Book",
+        "title": null,
+        "cover": null
+      }
+    ]
+  }
+]
