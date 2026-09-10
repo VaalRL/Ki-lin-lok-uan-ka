@@ -693,6 +693,68 @@
       color: var(--text-muted);
       padding: 12px;
     }
+    /* Shortcuts Hint Card & Floating Toast */
+    .shortcuts-hint {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 10px 12px;
+      line-height: 1.6;
+      border-radius: 12px;
+      background: var(--input-bg);
+      border: 1px dashed var(--card-border);
+      margin-top: 4px;
+    }
+    .shortcuts-title {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+      font-size: 0.75rem;
+    }
+    .shortcuts-keys {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px 10px;
+    }
+    .shortcuts-keys span {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .shortcuts-hint code {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-family: inherit;
+      font-weight: 800;
+      color: var(--text);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+    .floating-toast {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-30px);
+      background: var(--card);
+      border: 1.5px solid var(--primary);
+      color: var(--text);
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      pointer-events: none;
+      opacity: 0;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 9999;
+      white-space: nowrap;
+    }
+    .floating-toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
@@ -850,6 +912,19 @@
       <div class="history-chips" id="history-chips">
         <!-- 動態歷史標籤 -->
       </div>
+    <!-- 7. 鍵盤快捷鍵指南 (電腦/筆電/外接鍵盤友善) -->
+    <div class="shortcuts-hint" id="shortcuts-hint">
+      <div class="shortcuts-title">⌨️ 電腦鍵盤快捷鍵</div>
+      <div class="shortcuts-keys">
+        <span><code>空白鍵</code> 播放/暫停</span>
+        <span><code>←</code> <code>→</code> 快退/快進 5秒</span>
+        <span><code>[</code> <code>]</code> 上下首</span>
+        <span><code>↑</code> <code>↓</code> 音量調節</span>
+        <span><code>M</code> 靜音</span>
+        <span><code>L</code> 循環</span>
+        <span><code>R</code> 重播</span>
+        <span><code>/</code> 搜尋</span>
+      </div>
     </div>
 
     <footer>
@@ -973,6 +1048,7 @@
 
       setupInputBehaviors();
       setupPlaybackControls();
+      setupKeyboardShortcuts();
     });
 
     // 深色 / 淺色主題管理 (支援 localStorage 持久化快取)
@@ -1855,6 +1931,150 @@
       localStorage.removeItem("g_history_v4");
       renderHistory();
     });
+
+    // 浮動狀態反饋 (HUD Toast)
+    function showFloatingToast(msg) {
+      const toast = document.getElementById("floating-toast");
+      if (!toast) return;
+      toast.textContent = msg;
+      toast.classList.add("show");
+      clearTimeout(toast._timer);
+      toast._timer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 1200);
+    }
+
+    // 電腦鍵盤快捷鍵系統 (桌機 / 筆電 / iPad 外接鍵盤)
+    function setupKeyboardShortcuts() {
+      window.addEventListener("keydown", (e) => {
+        // 檢查使用者是否正在輸入框、下拉選單或搜尋框內打字
+        const activeEl = document.activeElement;
+        const isEditing = activeEl && (
+          activeEl.tagName === "INPUT" ||
+          activeEl.tagName === "SELECT" ||
+          activeEl.tagName === "TEXTAREA" ||
+          activeEl.isContentEditable
+        );
+
+        if (isEditing) {
+          // 在輸入框打字時，按下 Escape 鍵可使輸入框失焦，恢復全局快捷鍵
+          if (e.key === "Escape") {
+            activeEl.blur();
+          }
+          return;
+        }
+
+        // 1. 空白鍵：播放 / 暫停
+        if (e.code === "Space") {
+          e.preventDefault();
+          if (audio.paused) {
+            audio.play().catch(err => console.log("Space play gesture:", err));
+            showFloatingToast("▶ 播放");
+          } else {
+            audio.pause();
+            showFloatingToast("⏸ 暫停");
+          }
+          return;
+        }
+
+        // 2. 左方向鍵：快退 5 秒
+        if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          audio.currentTime = Math.max(0, audio.currentTime - 5);
+          showFloatingToast(`↺ 快退 5 秒 (${formatTime(audio.currentTime)})`);
+          return;
+        }
+
+        // 3. 右方向鍵：快進 5 秒
+        if (e.key === "ArrowRight") {
+          e.preventDefault();
+          audio.currentTime = Math.min(audio.duration || 9999, audio.currentTime + 5);
+          showFloatingToast(`5s↻ 快進 5 秒 (${formatTime(audio.currentTime)})`);
+          return;
+        }
+
+        // 4. 上方向鍵：提高音量
+        if (e.key === "ArrowUp") {
+          e.preventDefault();
+          audio.muted = false;
+          audio.volume = Math.min(1, Math.round((audio.volume + 0.05) * 100) / 100);
+          showFloatingToast(`🔊 音量 ${Math.round(audio.volume * 100)}%`);
+          return;
+        }
+
+        // 5. 下方向鍵：降低音量
+        if (e.key === "ArrowDown") {
+          e.preventDefault();
+          audio.volume = Math.max(0, Math.round((audio.volume - 0.05) * 100) / 100);
+          if (audio.volume === 0) {
+            showFloatingToast("🔇 靜音");
+          } else {
+            showFloatingToast(`🔉 音量 ${Math.round(audio.volume * 100)}%`);
+          }
+          return;
+        }
+
+        // 6. [ 鍵：上一首
+        if (e.key === "[") {
+          e.preventDefault();
+          document.getElementById("btn-prev").click();
+          showFloatingToast("⏮ 上一首");
+          return;
+        }
+
+        // 7. ] 鍵：下一首
+        if (e.key === "]") {
+          e.preventDefault();
+          document.getElementById("btn-next").click();
+          showFloatingToast("⏭ 下一首");
+          return;
+        }
+
+        // 8. M / m 鍵：靜音 / 恢復音量
+        if (e.key === "m" || e.key === "M") {
+          e.preventDefault();
+          audio.muted = !audio.muted;
+          showFloatingToast(audio.muted ? "🔇 已靜音" : `🔊 恢復音量 (${Math.round(audio.volume * 100)}%)`);
+          return;
+        }
+
+        // 9. L / l 鍵：切換單曲循環
+        if (e.key === "l" || e.key === "L") {
+          e.preventDefault();
+          loopCheckbox.checked = !loopCheckbox.checked;
+          loopCheckbox.dispatchEvent(new Event("change"));
+          showFloatingToast(loopCheckbox.checked ? "🔁 已開啟單曲循環" : "🔁 已關閉單曲循環");
+          return;
+        }
+
+        // 10. R / r 鍵：從頭重播
+        if (e.key === "r" || e.key === "R") {
+          e.preventDefault();
+          audio.currentTime = 0;
+          if (audio.paused) audio.play().catch(err => console.log(err));
+          showFloatingToast("↺ 從頭重播本首");
+          return;
+        }
+
+        // 11. / 鍵：快速打開並聚焦搜尋框
+        if (e.key === "/") {
+          e.preventDefault();
+          const trackSearch = document.getElementById("track-search");
+          const drawerContent = document.getElementById("drawer-content");
+          if (drawerContent && drawerContent.style.display === "none") {
+            document.getElementById("drawer-toggle").click();
+          }
+          if (trackSearch) {
+            trackSearch.focus();
+            trackSearch.select();
+          }
+          return;
+        }
+      });
+    }
   </script>
+
+  <!-- 浮動提示浮磚 (快捷鍵操作與狀態提示) -->
+  <div id="floating-toast" class="floating-toast"></div>
 </body>
 </html>
