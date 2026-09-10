@@ -4,8 +4,8 @@
   "description": "專為實體英語教材課後複習打造的極簡隨身聽",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#0f172a",
+  "background_color": "#1a130e",
+  "theme_color": "#1a130e",
   "icons": [
     {
       "src": "icon-192.png",

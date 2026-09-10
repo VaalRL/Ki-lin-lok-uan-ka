@@ -5,9 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#0f172a">
+  <meta name="theme-color" content="#1a130e">
   <title>麒麟鹿player - 全系列教材隨身聽</title>
   
+  <!-- Open Graph & Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="🦒 麒麟鹿player - 全系列實體英語教材隨身聽">
+  <meta property="og:description" content="專為實體英語教材課後複習打造的極簡隨身聽 · 雙格純數字輸入 · 手機大數字鍵盤 · 即開即播">
+  <meta property="og:image" content="https://vaalrl.github.io/Ki-lin-lok-uan-ka/icon-512.png">
+  <meta property="og:url" content="https://vaalrl.github.io/Ki-lin-lok-uan-ka/">
+
   <!-- Tab Icon (Favicon) & App Icons -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -24,47 +31,49 @@
         const theme = saved || (prefersLight ? "light" : "dark");
         document.documentElement.setAttribute("data-theme", theme);
         const meta = document.querySelector('meta[name="theme-color"]');
-        if (meta) meta.setAttribute("content", theme === "light" ? "#f8fafc" : "#0f172a");
+        if (meta) meta.setAttribute("content", theme === "light" ? "#fff9f2" : "#1a130e");
       } catch(e) {}
     })();
   </script>
 
   <style>
     :root {
-      --primary: #f59e0b;
-      --primary-hover: #d97706;
-      --bg: #0f172a;
-      --card: #1e293b;
-      --card-border: #334155;
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
-      --accent: #38bdf8;
-      --success: #10b981;
-      --input-bg: #0f172a;
-      --input-text: #f8fafc;
-      --item-hover: #1e293b;
-      --progress-bg: #334155;
-      --link-box-bg: #0f172a;
-      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.35);
+      /* 長頸鹿深邃暖木大地色系 (Giraffe Dark Theme) */
+      --primary: #ff8800; /* 長頸鹿官方標準招牌亮橘 */
+      --primary-hover: #ffa133;
+      --bg: #1a130e; /* 溫潤可可大地黑 */
+      --card: #271e17; /* 深暖木質卡片 */
+      --card-border: #423225; /* 深琥珀斑紋邊框 */
+      --text: #fff6ed; /* 柔和暖奶白字體 */
+      --text-muted: #bda899; /* 駝灰次級文字 */
+      --accent: #38bdf8; /* 長頸鹿活力天藍 */
+      --success: #10b981; /* 翡翠綠 */
+      --input-bg: #1c1510;
+      --input-text: #fff6ed;
+      --item-hover: #38291f;
+      --progress-bg: #423225;
+      --link-box-bg: #1a130e;
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.45);
       --radius: 16px;
     }
 
     [data-theme="light"] {
-      --primary: #d97706;
-      --primary-hover: #b45309;
-      --bg: #f8fafc;
-      --card: #ffffff;
-      --card-border: #e2e8f0;
-      --text: #0f172a;
-      --text-muted: #64748b;
-      --accent: #0284c7;
-      --success: #059669;
-      --input-bg: #f1f5f9;
-      --input-text: #0f172a;
-      --item-hover: #e2e8f0;
-      --progress-bg: #e2e8f0;
-      --link-box-bg: #f8fafc;
-      --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.08);
+      /* 長頸鹿陽光暖橙晨曦色系 (Giraffe Light Theme) */
+      --primary: #ff8800; /* 長頸鹿官方標準招牌亮橘 */
+      --primary-hover: #e65c00;
+      --bg: #fff9f2; /* 長頸鹿品牌溫潤暖奶白 */
+      --card: #ffffff; /* 純白乾淨卡片 */
+      --card-border: #fce2cc; /* 柔和奶橙邊框 */
+      --text: #2c1e14; /* 長頸鹿深焙暖棕黑 */
+      --text-muted: #8c7362; /* 溫潤大地灰棕 */
+      --accent: #0284c7; /* 活力清朗天藍 */
+      --success: #059669; /* 翡翠綠 */
+      --input-bg: #fff3e6; /* 淡淡長頸鹿暖橙底色 */
+      --input-text: #2c1e14;
+      --item-hover: #fde7d4;
+      --progress-bg: #fed7aa; /* 柔和淡橙滑軌 */
+      --link-box-bg: #fff7ed;
+      --shadow: 0 8px 24px -4px rgba(255, 136, 0, 0.12);
     }
     * {
       box-sizing: border-box;
@@ -470,6 +479,80 @@
       border-color: var(--accent);
     }
 
+    /* Share Section & Error Banner */
+    .share-actions-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      align-items: center;
+    }
+    .share-action-btn {
+      flex: 1;
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 9px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .share-action-btn:active {
+      transform: scale(0.97);
+      background: var(--item-hover);
+    }
+    .share-action-btn.copied {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: #10b981;
+      color: #10b981;
+    }
+    .cdn-toggle-btn {
+      background: transparent;
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 9px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .cdn-toggle-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .error-banner {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #ef4444;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      margin-top: 10px;
+      line-height: 1.4;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    [data-theme="light"] .error-banner {
+      background: #fee2e2;
+      border-color: #fca5a5;
+      color: #b91c1c;
+    }
+    @keyframes pulseGlow {
+      0% { opacity: 0.6; transform: scale(0.96); }
+      100% { opacity: 1; transform: scale(1.04); }
+    }
+    .is-buffering {
+      animation: pulseGlow 0.8s infinite alternate !important;
+    }
+
     /* Direct Link */
     .link-box {
       background: var(--link-box-bg);
@@ -479,7 +562,7 @@
       font-size: 0.72rem;
       color: var(--text-muted);
       word-break: break-all;
-      margin-top: 10px;
+      margin-top: 8px;
       user-select: all;
     }
     /* Tracklist Drawer */
@@ -671,7 +754,7 @@
         </div>
 
         <!-- 播放按鈕 (無文字，純圖示) -->
-        <button id="play-submit" class="play-btn-icon-only" title="立即播放">▶</button>
+        <button id="play-submit" class="play-btn-icon-only" title="立即播放" aria-label="播放課本指定曲目">▶</button>
       </div>
     </div>
 
@@ -686,7 +769,7 @@
 
       <!-- 極簡進度條與時間顯示 (Spotify 質感) -->
       <div class="progress-section">
-        <div class="progress-bar-container" id="progress-container" title="點擊或拖曳跳轉進度">
+        <div class="progress-bar-container" id="progress-container" title="點擊或拖曳跳轉進度" aria-label="播放進度條">
           <div class="progress-bar-fill" id="progress-fill">
             <div class="progress-thumb"></div>
           </div>
@@ -699,11 +782,11 @@
 
       <!-- 純圖示主控制列 (上一首、-5秒、大播放鍵、+5秒、下一首) -->
       <div class="icon-controls-bar">
-        <button class="icon-ctrl-btn" id="btn-prev" title="上一首">⏮</button>
-        <button class="icon-ctrl-btn btn-jump" id="btn-rewind-5" title="快退 5 秒">↺5s</button>
-        <button class="main-play-btn" id="btn-play-pause" title="播放 / 暫停">▶</button>
-        <button class="icon-ctrl-btn btn-jump" id="btn-forward-5" title="快進 5 秒">5s↻</button>
-        <button class="icon-ctrl-btn" id="btn-next" title="下一首">⏭</button>
+        <button class="icon-ctrl-btn" id="btn-prev" title="上一首" aria-label="上一首">⏮</button>
+        <button class="icon-ctrl-btn btn-jump" id="btn-rewind-5" title="快退 5 秒" aria-label="快退 5 秒">↺5s</button>
+        <button class="main-play-btn" id="btn-play-pause" title="播放 / 暫停" aria-label="播放或暫停">▶</button>
+        <button class="icon-ctrl-btn btn-jump" id="btn-forward-5" title="快進 5 秒" aria-label="快進 5 秒">5s↻</button>
+        <button class="icon-ctrl-btn" id="btn-next" title="下一首" aria-label="下一首">⏭</button>
       </div>
 
       <!-- Checkbox 控制區 (單曲循環、連續播放) 與 倍速按鈕 -->
@@ -711,24 +794,35 @@
         <div class="checkbox-group">
           <!-- 循環播放 Checkbox (純圖示) -->
           <label class="icon-checkbox-label" title="單曲循環">
-            <input type="checkbox" id="loop-checkbox">
+            <input type="checkbox" id="loop-checkbox" aria-label="單曲循環開關">
             <span style="font-size: 1.15rem;">🔁</span>
           </label>
           <!-- 接續播放 Checkbox (純圖示) -->
           <label class="icon-checkbox-label" title="連續播放下一首">
-            <input type="checkbox" id="auto-next-checkbox" checked>
+            <input type="checkbox" id="auto-next-checkbox" checked aria-label="自動播放下一首開關">
             <span style="font-size: 1.15rem;">⏩</span>
           </label>
         </div>
 
         <div class="speed-pills">
-          <button class="speed-btn" data-speed="0.8">0.8x</button>
-          <button class="speed-btn active" data-speed="1.0">1.0x</button>
-          <button class="speed-btn" data-speed="1.2">1.2x</button>
+          <button class="speed-btn" data-speed="0.8" aria-label="0.8倍速">0.8x</button>
+          <button class="speed-btn active" data-speed="1.0" aria-label="正常倍速 1.0x">1.0x</button>
+          <button class="speed-btn" data-speed="1.2" aria-label="1.2倍速">1.2x</button>
         </div>
       </div>
 
-      <div class="link-box" id="direct-url-box">
+      <!-- 錯誤警示浮條 -->
+      <div id="audio-error-banner" class="error-banner" style="display: none;"></div>
+
+      <!-- 分享與來源操作區 -->
+      <div class="share-actions-row">
+        <button id="btn-copy-share" class="share-action-btn" title="複製本曲專屬播放器連結" aria-label="複製本曲播放器專屬連結">
+          <span id="copy-share-icon">🔗</span> <span id="copy-share-text">複製本曲分享連結</span>
+        </button>
+        <button id="btn-toggle-cdn" class="cdn-toggle-btn" title="檢視 CDN 原始音訊來源" aria-label="檢視 CDN 原始音訊來源">CDN 來源</button>
+      </div>
+
+      <div class="link-box" id="direct-url-box" style="display: none;">
         CDN 串流連結
       </div>
     </div>
@@ -891,11 +985,11 @@
       if (theme === "light") {
         themeIcon.textContent = "☀️";
         themeToggleBtn.setAttribute("title", "目前為淺色模式，點擊切換為深色模式");
-        if (themeColorMeta) themeColorMeta.setAttribute("content", "#f8fafc");
+        if (themeColorMeta) themeColorMeta.setAttribute("content", "#fff9f2");
       } else {
         themeIcon.textContent = "🌙";
         themeToggleBtn.setAttribute("title", "目前為深色模式，點擊切換為淺色模式");
-        if (themeColorMeta) themeColorMeta.setAttribute("content", "#0f172a");
+        if (themeColorMeta) themeColorMeta.setAttribute("content", "#1a130e");
       }
     }
 
@@ -947,8 +1041,11 @@
       playSubmit.addEventListener("click", handlePlaySubmitClick);
     }
 
-    // 設定純圖示控制按鈕與 Checkbox (全面同步三大播放按鈕)
+    // 設定純圖示控制按鈕與 Checkbox (全面同步三大播放按鈕、Media Session 與錯誤處理)
     function setupPlaybackControls() {
+      // 初始化 Media Session 行動鎖屏與耳機線控事件
+      initMediaSessionHandlers();
+
       // 主播放/暫停鍵
       btnPlayPause.addEventListener("click", () => {
         if (audio.paused) {
@@ -961,9 +1058,41 @@
       // 音訊播放狀態事件：同步全站所有播放按鈕 (輸入格旁、原生播放器、控制列大按鈕)
       audio.addEventListener("play", () => {
         updatePlayButtonsUI(true);
+        if ("mediaSession" in navigator) {
+          navigator.mediaSession.playbackState = "playing";
+        }
       });
       audio.addEventListener("pause", () => {
         updatePlayButtonsUI(false);
+        if ("mediaSession" in navigator) {
+          navigator.mediaSession.playbackState = "paused";
+        }
+      });
+
+      // 音訊載入錯誤與緩衝狀態處理
+      const audioErrorBanner = document.getElementById("audio-error-banner");
+      audio.addEventListener("error", (e) => {
+        console.warn("Audio error occurred:", e);
+        updatePlayButtonsUI(false);
+        btnPlayPause.classList.remove("is-buffering");
+        playSubmit.classList.remove("is-buffering");
+        if (audioErrorBanner) {
+          audioErrorBanner.style.display = "flex";
+          audioErrorBanner.innerHTML = "⚠️ <strong>音訊載入失敗</strong>：請確認網路連線是否正常，或檢查該教材課次是否有提供音軌。";
+        }
+      });
+      audio.addEventListener("canplay", () => {
+        btnPlayPause.classList.remove("is-buffering");
+        playSubmit.classList.remove("is-buffering");
+        if (audioErrorBanner) audioErrorBanner.style.display = "none";
+      });
+      audio.addEventListener("waiting", () => {
+        btnPlayPause.classList.add("is-buffering");
+        playSubmit.classList.add("is-buffering");
+      });
+      audio.addEventListener("playing", () => {
+        btnPlayPause.classList.remove("is-buffering");
+        playSubmit.classList.remove("is-buffering");
       });
 
       // 快退 5 秒 (↺5s)
@@ -1030,6 +1159,15 @@
           timeDuration.textContent = formatTime(dur);
           const percent = Math.min(100, Math.max(0, (curr / dur) * 100));
           progressFill.style.width = `${percent}%`;
+          if ("mediaSession" in navigator && "setPositionState" in navigator.mediaSession) {
+            try {
+              navigator.mediaSession.setPositionState({
+                duration: dur,
+                playbackRate: audio.playbackRate || 1.0,
+                position: Math.min(curr, dur)
+              });
+            } catch(e) {}
+          }
         } else {
           progressFill.style.width = "0%";
         }
@@ -1045,7 +1183,113 @@
         timeDuration.textContent = formatTime(dur);
       });
 
+      // 複製分享連結與切換 CDN 來源
+      const btnCopyShare = document.getElementById("btn-copy-share");
+      const copyShareText = document.getElementById("copy-share-text");
+      const btnToggleCdn = document.getElementById("btn-toggle-cdn");
+      const directUrlBox = document.getElementById("direct-url-box");
+
+      if (btnCopyShare) {
+        btnCopyShare.addEventListener("click", () => {
+          const shareUrl = window.location.href;
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(shareUrl).then(() => {
+              btnCopyShare.classList.add("copied");
+              if (copyShareText) copyShareText.textContent = "✓ 已複製分享連結！";
+              setTimeout(() => {
+                btnCopyShare.classList.remove("copied");
+                if (copyShareText) copyShareText.textContent = "複製本曲分享連結";
+              }, 2500);
+            }).catch(() => {
+              prompt("請手動複製播放連結：", shareUrl);
+            });
+          } else {
+            prompt("請手動複製播放連結：", shareUrl);
+          }
+        });
+      }
+
+      if (btnToggleCdn && directUrlBox) {
+        btnToggleCdn.addEventListener("click", () => {
+          const isHidden = directUrlBox.style.display === "none";
+          directUrlBox.style.display = isHidden ? "block" : "none";
+          btnToggleCdn.textContent = isHidden ? "隱藏 CDN" : "CDN 來源";
+        });
+      }
+
       setupProgressBarInteractions();
+    }
+
+    // Media Session API 整合：支援行動鎖屏與藍牙耳機線控 (AirPods / 藍牙耳機)
+    function initMediaSessionHandlers() {
+      if (!("mediaSession" in navigator)) return;
+      try {
+        navigator.mediaSession.setActionHandler("play", () => {
+          audio.play().catch(e => console.log("MediaSession play:", e));
+        });
+        navigator.mediaSession.setActionHandler("pause", () => {
+          audio.pause();
+        });
+        navigator.mediaSession.setActionHandler("previoustrack", () => {
+          if (currentTrackIndex > 0) {
+            playTrackByIndex(currentTrackIndex - 1, true);
+          } else {
+            stepBook(-1);
+          }
+        });
+        navigator.mediaSession.setActionHandler("nexttrack", () => {
+          stepNext();
+        });
+        navigator.mediaSession.setActionHandler("seekbackward", (details) => {
+          const skip = (details && details.seekOffset) || 5;
+          audio.currentTime = Math.max(0, audio.currentTime - skip);
+        });
+        navigator.mediaSession.setActionHandler("seekforward", (details) => {
+          const skip = (details && details.seekOffset) || 5;
+          audio.currentTime = Math.min(audio.duration || 9999, audio.currentTime + skip);
+        });
+        navigator.mediaSession.setActionHandler("seekto", (details) => {
+          if (details && details.seekTime !== undefined && details.seekTime !== null) {
+            audio.currentTime = details.seekTime;
+          }
+        });
+      } catch(e) {
+        console.warn("MediaSession action handler setup error:", e);
+      }
+    }
+
+    function updateMediaSession(trackObj) {
+      if (!("mediaSession" in navigator)) return;
+      try {
+        const fn = (trackObj.audio || "").split("/").pop();
+        const trackTitle = trackObj.trackName || fn || `Track ${currentTrackIndex + 1}`;
+        const seriesTitle = CATALOG[currentSeries] ? CATALOG[currentSeries].title : currentSeries;
+        const bookTitle = formatBookTitle(currentBookId);
+
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: `${bookTitle} · ${trackTitle}`,
+          artist: `麒麟鹿player · ${seriesTitle}`,
+          album: `${seriesTitle} (${bookTitle})`,
+          artwork: [
+            { src: "icon-192.png", sizes: "192x192", type: "image/png" },
+            { src: "icon-512.png", sizes: "512x512", type: "image/png" }
+          ]
+        });
+        navigator.mediaSession.playbackState = audio.paused ? "paused" : "playing";
+      } catch(e) {
+        console.warn("MediaSession metadata update error:", e);
+      }
+    }
+
+    // 網址即時雙向同步 (Deep Linking)
+    function updateUrlParams(series, book, trackCode) {
+      try {
+        const url = new URL(window.location.href);
+        url.searchParams.set("s", series);
+        url.searchParams.set("b", book);
+        url.searchParams.set("t", trackCode);
+        window.history.replaceState({}, "", url.toString());
+      } catch(e) {}
     }
 
     let isSeeking = false;
@@ -1261,7 +1505,10 @@
       localStorage.setItem("g_book", currentBookId);
     }
 
+    let currentFetchCounter = 0;
+
     function loadBookTracks(sid, bid, callback) {
+      const fetchId = ++currentFetchCounter;
       tracklistTitle.textContent = `🎵 ${formatBookTitle(bid)} 曲目清單 (讀取中...)`;
       tracklistContainer.innerHTML = '<div class="loading-spinner">正向雲端微服務檢索音軌清單...</div>';
 
@@ -1270,6 +1517,7 @@
       fetch(apiUrl)
         .then(res => res.json())
         .then(data => {
+          if (fetchId !== currentFetchCounter) return;
           if (data && data.data && data.data.length > 0) {
             currentTracks = data.data;
           } else {
@@ -1284,6 +1532,7 @@
           if (callback) callback();
         })
         .catch(err => {
+          if (fetchId !== currentFetchCounter) return;
           console.warn("API 連線失敗，啟動本地退路:", err);
           if (sid === "AC") {
             currentTracks = generateActionFallbackTracks(bid);
@@ -1353,6 +1602,7 @@
       displayFilename.textContent = fn;
       directUrlBox.textContent = t.audio;
 
+      let code = "";
       if (LESSON_BASED_SERIES.has(currentSeries)) {
         const match = fn.match(/_(\d+)-(\d+)\.mp3$/);
         if (match) {
@@ -1360,12 +1610,16 @@
           currentPlayingTrack = match[2];
           lessonInput.value = match[1];
           trackInput.value = match[2];
-          localStorage.setItem("g_track_combined", `${match[1]}-${match[2]}`);
+          code = `${match[1]}-${match[2]}`;
+          localStorage.setItem("g_track_combined", code);
+        } else {
+          code = `${lessonInput.value}-${trackInput.value}`;
         }
       } else {
         currentPlayingTrack = String(idx + 1);
         trackInput.value = `${idx + 1}`;
-        localStorage.setItem("g_track_combined", `${idx + 1}`);
+        code = String(idx + 1);
+        localStorage.setItem("g_track_combined", code);
       }
 
       document.querySelectorAll(".track-item").forEach(el => {
@@ -1380,11 +1634,20 @@
         audio.play().catch(e => console.log("Auto-play awaiting gesture:", e));
       }
 
+      updateMediaSession(t);
+      updateUrlParams(currentSeries, currentBookId, code);
+
       const historyLabel = LESSON_BASED_SERIES.has(currentSeries) 
         ? `${currentSeries} ${formatBookTitle(currentBookId)} [${lessonInput.value}-${trackInput.value}]`
         : `${currentSeries} ${formatBookTitle(currentBookId)} [#${trackInput.value}]`;
 
-      addHistory(historyLabel);
+      addHistory({
+        s: currentSeries,
+        b: currentBookId,
+        code: code,
+        label: historyLabel,
+        time: Date.now()
+      });
     }
 
     function submitInputsAndPlay() {
@@ -1414,7 +1677,18 @@
           timeDuration.textContent = "0:00";
           progressFill.style.width = "0%";
           audio.play().catch(e => console.log("Awaiting user gesture:", e));
-          addHistory(`AC ${formatBookTitle(currentBookId)} [${l}-${tr}]`);
+
+          const code = `${l}-${tr}`;
+          const historyLabel = `AC ${formatBookTitle(currentBookId)} [${code}]`;
+          updateMediaSession({ audio: directUrl, trackName: `Lesson ${l} Track ${tr}` });
+          updateUrlParams("AC", currentBookId, code);
+          addHistory({
+            s: "AC",
+            b: currentBookId,
+            code: code,
+            label: historyLabel,
+            time: Date.now()
+          });
         } else {
           alert(`未在本書中找到第 ${l} 課第 ${tr} 首，請確認編號`);
         }
@@ -1461,19 +1735,42 @@
       renderTracklist(e.target.value);
     });
 
-    // 歷程紀錄
-    function addHistory(item) {
-      playHistory = playHistory.filter(x => x !== item);
-      playHistory.unshift(item);
-      if (playHistory.length > 8) playHistory.pop();
-      localStorage.setItem("g_history_v4", JSON.stringify(playHistory));
+    // 歷程紀錄 (支援結構化物件儲存與跨冊精準切換)
+    function addHistory(histObj) {
+      if (!histObj) return;
+      playHistory = playHistory.filter(x => {
+        if (typeof x === "object" && x !== null) {
+          return !(x.s === histObj.s && x.b === histObj.b && x.code === histObj.code);
+        }
+        return x !== histObj.label;
+      });
+      playHistory.unshift(histObj);
+      if (playHistory.length > 10) playHistory.pop();
+      try {
+        localStorage.setItem("g_history_v5", JSON.stringify(playHistory));
+      } catch(e) {}
       renderHistory();
     }
 
     function loadSavedHistory() {
-      const saved = localStorage.getItem("g_history_v4");
-      if (saved) {
-        try { playHistory = JSON.parse(saved); } catch(e){}
+      const savedV5 = localStorage.getItem("g_history_v5");
+      if (savedV5) {
+        try { playHistory = JSON.parse(savedV5); } catch(e) {}
+      } else {
+        const savedV4 = localStorage.getItem("g_history_v4");
+        if (savedV4) {
+          try {
+            const raw = JSON.parse(savedV4);
+            if (Array.isArray(raw)) {
+              playHistory = raw.map(item => {
+                if (typeof item === "string") {
+                  return { label: item, legacy: true };
+                }
+                return item;
+              });
+            }
+          } catch(e) {}
+        }
       }
       renderHistory();
     }
@@ -1487,21 +1784,37 @@
       playHistory.forEach(item => {
         const chip = document.createElement("span");
         chip.className = "chip";
-        chip.textContent = item;
+        const labelText = typeof item === "object" && item.label ? item.label : String(item);
+        chip.textContent = labelText;
+        chip.title = "點擊載入並播放此曲目";
+
         chip.addEventListener("click", () => {
-          const match = item.match(/^(\w+)\s+([^\s]+)\s+\[(.*?)\]$/);
-          if (match) {
-            const s = match[1];
-            const code = match[3].replace("#", "");
-            if (CATALOG[s]) {
-              currentSeries = s;
-              seriesSelect.value = s;
-              updateSeriesModeUI();
-              renderBooksCarousel();
-              loadBookTracks(currentSeries, currentBookId, () => {
-                findAndPlayTrackByCode(code, true);
-              });
-            }
+          if (typeof item === "object" && item.s && item.b && item.code) {
+            currentSeries = item.s;
+            currentBookId = item.b;
+            seriesSelect.value = currentSeries;
+            updateSeriesModeUI();
+            renderBooksCarousel();
+            updateActiveBookChip();
+            loadBookTracks(currentSeries, currentBookId, () => {
+              findAndPlayTrackByCode(item.code, true);
+            });
+            return;
+          }
+
+          // 舊版純文字格式相容解析
+          const legacyStr = typeof item === "object" ? item.label : String(item);
+          const codeMatch = legacyStr.match(/\[(.*?)\]/);
+          const sMatch = legacyStr.match(/^([A-Za-z0-9]+)/);
+          if (sMatch && CATALOG[sMatch[1]]) {
+            currentSeries = sMatch[1];
+            seriesSelect.value = currentSeries;
+            updateSeriesModeUI();
+            renderBooksCarousel();
+            const code = codeMatch ? codeMatch[1].replace("#", "").trim() : "1";
+            loadBookTracks(currentSeries, currentBookId, () => {
+              findAndPlayTrackByCode(code, true);
+            });
           }
         });
         historyChips.appendChild(chip);
@@ -1538,6 +1851,7 @@
 
     document.getElementById("clear-history").addEventListener("click", () => {
       playHistory = [];
+      localStorage.removeItem("g_history_v5");
       localStorage.removeItem("g_history_v4");
       renderHistory();
     });
