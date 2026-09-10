@@ -14,6 +14,21 @@
   <link rel="alternate icon" href="favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="manifest" href="manifest.json">
+  
+  <!-- 防止深色/淺色切換時畫面閃爍 (Anti-FOUC Script) -->
+  <script>
+    (function() {
+      try {
+        const saved = localStorage.getItem("kilinlok_theme");
+        const prefersLight = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
+        const theme = saved || (prefersLight ? "light" : "dark");
+        document.documentElement.setAttribute("data-theme", theme);
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute("content", theme === "light" ? "#f8fafc" : "#0f172a");
+      } catch(e) {}
+    })();
+  </script>
+
   <style>
     :root {
       --primary: #f59e0b;
@@ -25,7 +40,31 @@
       --text-muted: #94a3b8;
       --accent: #38bdf8;
       --success: #10b981;
+      --input-bg: #0f172a;
+      --input-text: #f8fafc;
+      --item-hover: #1e293b;
+      --progress-bg: #334155;
+      --link-box-bg: #0f172a;
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.35);
       --radius: 16px;
+    }
+
+    [data-theme="light"] {
+      --primary: #d97706;
+      --primary-hover: #b45309;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --card-border: #e2e8f0;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --accent: #0284c7;
+      --success: #059669;
+      --input-bg: #f1f5f9;
+      --input-text: #0f172a;
+      --item-hover: #e2e8f0;
+      --progress-bg: #e2e8f0;
+      --link-box-bg: #f8fafc;
+      --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.08);
     }
     * {
       box-sizing: border-box;
@@ -51,8 +90,39 @@
       gap: 14px;
     }
     header {
+      position: relative;
       text-align: center;
       padding: 4px 0 6px 0;
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .theme-toggle-btn {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--card);
+      border: 1.5px solid var(--card-border);
+      color: var(--text);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      transition: all 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+      outline: none;
+    }
+    .theme-toggle-btn:active {
+      transform: translateY(-50%) scale(0.9);
     }
     header h1 {
       font-size: 1.35rem;
@@ -63,6 +133,7 @@
       justify-content: center;
       gap: 6px;
       letter-spacing: 0.5px;
+      padding-right: 32px; /* room for toggle button */
     }
     header p {
       font-size: 0.8rem;
@@ -74,7 +145,8 @@
       border: 1px solid var(--card-border);
       border-radius: var(--radius);
       padding: 16px;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.35);
+      box-shadow: var(--shadow);
+      transition: background 0.25s, border-color 0.25s;
     }
     .label {
       font-size: 0.8rem;
@@ -90,9 +162,9 @@
     /* Select styling */
     select.custom-select {
       width: 100%;
-      background: #0f172a;
+      background: var(--input-bg);
       border: 1.5px solid var(--card-border);
-      color: #fff;
+      color: var(--input-text);
       padding: 10px 14px;
       border-radius: 12px;
       font-size: 0.95rem;
@@ -126,7 +198,7 @@
     }
     .book-chip {
       flex: 0 0 auto;
-      background: #0f172a;
+      background: var(--input-bg);
       border: 1px solid var(--card-border);
       color: var(--text);
       padding: 8px 14px;
@@ -164,10 +236,10 @@
     }
     .num-input {
       width: 100%;
-      background: #0f172a;
+      background: var(--input-bg);
       border: 2px solid var(--card-border);
       border-radius: 12px;
-      color: #fff;
+      color: var(--input-text);
       font-size: 1.5rem;
       font-weight: 800;
       text-align: center;
@@ -229,7 +301,7 @@
     .now-playing-title {
       font-size: 1.15rem;
       font-weight: 800;
-      color: #fff;
+      color: var(--text);
       margin-top: 2px;
     }
     .now-playing-sub {
@@ -250,7 +322,7 @@
     .progress-bar-container {
       width: 100%;
       height: 7px;
-      background: #334155;
+      background: var(--progress-bg);
       border-radius: 4px;
       cursor: pointer;
       position: relative;
@@ -298,7 +370,7 @@
       margin: 14px 0 8px 0;
     }
     .icon-ctrl-btn {
-      background: #0f172a;
+      background: var(--input-bg);
       border: 1px solid var(--card-border);
       color: var(--text);
       width: 46px;
@@ -314,7 +386,7 @@
       user-select: none;
     }
     .icon-ctrl-btn:active {
-      background: #334155;
+      background: var(--item-hover);
       transform: scale(0.92);
     }
     .icon-ctrl-btn.btn-jump {
@@ -383,7 +455,7 @@
       gap: 6px;
     }
     .speed-btn {
-      background: #0f172a;
+      background: var(--input-bg);
       border: 1px solid var(--card-border);
       color: var(--text-muted);
       padding: 4px 8px;
@@ -400,7 +472,8 @@
 
     /* Direct Link */
     .link-box {
-      background: #0f172a;
+      background: var(--link-box-bg);
+      border: 1px solid var(--card-border);
       padding: 8px 10px;
       border-radius: 8px;
       font-size: 0.72rem;
@@ -456,11 +529,12 @@
       padding-right: 4px;
     }
     .track-item {
-      background: #0f172a;
+      background: var(--input-bg);
       border: 1px solid transparent;
       padding: 8px 12px;
       border-radius: 8px;
       font-size: 0.82rem;
+      color: var(--text);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -468,7 +542,7 @@
       transition: all 0.15s;
     }
     .track-item:hover, .track-item:active {
-      background: #1e293b;
+      background: var(--item-hover);
       border-color: var(--primary);
     }
     .track-item.active {
@@ -479,9 +553,9 @@
     }
     .track-search {
       width: 100%;
-      background: #0f172a;
+      background: var(--input-bg);
       border: 1px solid var(--card-border);
-      color: #fff;
+      color: var(--input-text);
       padding: 6px 10px;
       border-radius: 8px;
       font-size: 0.8rem;
@@ -496,7 +570,7 @@
       margin-top: 6px;
     }
     .chip {
-      background: #0f172a;
+      background: var(--input-bg);
       border: 1px solid var(--card-border);
       color: var(--text-muted);
       padding: 4px 10px;
@@ -542,7 +616,12 @@
 
   <div class="container">
     <header>
-      <h1>🦒 麒麟鹿player 全系列隨身聽</h1>
+      <div class="header-inner">
+        <h1>🦒 麒麟鹿player 全系列隨身聽</h1>
+        <button id="theme-toggle" class="theme-toggle-btn" title="切換深色/淺色模式" aria-label="切換深色/淺色模式">
+          <span id="theme-icon">🌙</span>
+        </button>
+      </div>
       <p>課本印幾之幾 · 雙格純數字鍵盤直連 · GitHub Pages 直載</p>
     </header>
 
@@ -747,9 +826,13 @@
     const tracklistTitle = document.getElementById("tracklist-title");
     const tracklistContainer = document.getElementById("tracklist-container");
     const trackSearch = document.getElementById("track-search");
+    const themeToggleBtn = document.getElementById("theme-toggle");
+    const themeIcon = document.getElementById("theme-icon");
+    const themeColorMeta = document.querySelector('meta[name="theme-color"]');
 
     // 初始化
     window.addEventListener("DOMContentLoaded", () => {
+      initTheme();
       renderSeriesDropdown();
       loadSavedHistory();
 
@@ -798,7 +881,34 @@
       setupPlaybackControls();
     });
 
-    // 設定大數字鍵盤與自動跳格
+    // 深色 / 淺色主題管理 (支援 localStorage 持久化快取)
+    function applyTheme(theme) {
+      document.documentElement.setAttribute("data-theme", theme);
+      try {
+        localStorage.setItem("kilinlok_theme", theme);
+      } catch(e) {}
+
+      if (theme === "light") {
+        themeIcon.textContent = "☀️";
+        themeToggleBtn.setAttribute("title", "目前為淺色模式，點擊切換為深色模式");
+        if (themeColorMeta) themeColorMeta.setAttribute("content", "#f8fafc");
+      } else {
+        themeIcon.textContent = "🌙";
+        themeToggleBtn.setAttribute("title", "目前為深色模式，點擊切換為淺色模式");
+        if (themeColorMeta) themeColorMeta.setAttribute("content", "#0f172a");
+      }
+    }
+
+    function initTheme() {
+      const currentTheme = document.documentElement.getAttribute("data-theme") || "dark";
+      applyTheme(currentTheme);
+
+      themeToggleBtn.addEventListener("click", () => {
+        const activeTheme = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
+        applyTheme(activeTheme);
+      });
+    }
+
     // 設定大數字鍵盤與自動跳格
     function setupInputBehaviors() {
       lessonInput.addEventListener("focus", function() { this.select(); });
