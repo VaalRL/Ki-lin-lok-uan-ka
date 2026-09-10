@@ -2,10 +2,13 @@
 
 > 專為實體英語教科書課後複習打造的極簡隨身聽 · 雙欄位純數字輸入 · 手機大數字鍵盤 · GitHub Pages 零配置即開即播
 
+### 🌐 線上即用網址 (Live Demo)
+👉 **[https://vaalrl.github.io/Ki-lin-lok-uan-ka/](https://vaalrl.github.io/Ki-lin-lok-uan-ka/)**
+
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Online%20(即開即用)-brightgreen?style=for-the-badge&logo=github)](https://vaalrl.github.io/Ki-lin-lok-uan-ka/)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Active-blue?style=for-the-badge)](https://vaalrl.github.io/Ki-lin-lok-uan-ka/)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Active-blue)](https://vaalrl.github.io/Ki-lin-lok-uan-ka/)
 [![Zero Dependencies](https://img.shields.io/badge/Dependencies-0%20(Pure%20Vanilla)-success)](#)
 [![Mobile Optimized](https://img.shields.io/badge/Mobile-iOS%20%2F%20Android-orange)](#)
 
