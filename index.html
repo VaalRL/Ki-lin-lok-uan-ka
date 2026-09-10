@@ -239,11 +239,54 @@
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     }
     audio {
+      display: none;
+    }
+
+    /* CUSTOM SLEEK PROGRESS BAR & TIME DISPLAY (Spotify Style) */
+    .progress-section {
+      margin-top: 14px;
+      padding: 0 4px;
+    }
+    .progress-bar-container {
       width: 100%;
-      height: 42px;
-      margin-top: 10px;
-      border-radius: 21px;
-      outline: none;
+      height: 7px;
+      background: #334155;
+      border-radius: 4px;
+      cursor: pointer;
+      position: relative;
+      touch-action: none;
+      user-select: none;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 4px;
+      position: relative;
+      pointer-events: none;
+      transition: width 0.05s linear;
+    }
+    .progress-thumb {
+      position: absolute;
+      top: 50%;
+      right: -6px;
+      transform: translateY(-50%);
+      width: 15px;
+      height: 15px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+      pointer-events: none;
+    }
+    .time-display {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     }
 
     /* ICON-ONLY PLAYBACK CONTROLS BAR */
@@ -530,7 +573,20 @@
         <div class="now-playing-series" id="display-series">Action Series</div>
         <div class="now-playing-title" id="display-title">Book 1 · Lesson 1 - Track 1</div>
         <div class="now-playing-sub" id="display-filename">AC1_1-1.mp3</div>
-        <audio id="audio-player" controls preload="auto" playsinline></audio>
+        <audio id="audio-player" preload="auto" playsinline></audio>
+      </div>
+
+      <!-- 極簡進度條與時間顯示 (Spotify 質感) -->
+      <div class="progress-section">
+        <div class="progress-bar-container" id="progress-container" title="點擊或拖曳跳轉進度">
+          <div class="progress-bar-fill" id="progress-fill">
+            <div class="progress-thumb"></div>
+          </div>
+        </div>
+        <div class="time-display">
+          <span id="time-current">0:00</span>
+          <span id="time-duration">0:00</span>
+        </div>
       </div>
 
       <!-- 純圖示主控制列 (上一首、-5秒、大播放鍵、+5秒、下一首) -->
@@ -650,6 +706,10 @@
     const displayFilename = document.getElementById("display-filename");
     const directUrlBox = document.getElementById("direct-url-box");
     const audio = document.getElementById("audio-player");
+    const progressContainer = document.getElementById("progress-container");
+    const progressFill = document.getElementById("progress-fill");
+    const timeCurrent = document.getElementById("time-current");
+    const timeDuration = document.getElementById("time-duration");
     const btnPlayPause = document.getElementById("btn-play-pause");
     const loopCheckbox = document.getElementById("loop-checkbox");
     const autoNextCheckbox = document.getElementById("auto-next-checkbox");
@@ -821,6 +881,111 @@
           btn.classList.add("active");
           audio.playbackRate = parseFloat(btn.dataset.speed);
         });
+      });
+
+      // 極簡進度條時間同步與更新 (取代原生 controls)
+      audio.addEventListener("timeupdate", () => {
+        if (isSeeking) return;
+        const curr = audio.currentTime || 0;
+        const dur = audio.duration || 0;
+        timeCurrent.textContent = formatTime(curr);
+        if (dur > 0) {
+          timeDuration.textContent = formatTime(dur);
+          const percent = Math.min(100, Math.max(0, (curr / dur) * 100));
+          progressFill.style.width = `${percent}%`;
+        } else {
+          progressFill.style.width = "0%";
+        }
+      });
+
+      audio.addEventListener("loadedmetadata", () => {
+        const dur = audio.duration || 0;
+        timeDuration.textContent = formatTime(dur);
+      });
+
+      audio.addEventListener("durationchange", () => {
+        const dur = audio.duration || 0;
+        timeDuration.textContent = formatTime(dur);
+      });
+
+      setupProgressBarInteractions();
+    }
+
+    let isSeeking = false;
+
+    function formatTime(secs) {
+      if (isNaN(secs) || secs === Infinity || secs < 0) return "0:00";
+      const m = Math.floor(secs / 60);
+      const s = Math.floor(secs % 60);
+      return `${m}:${s < 10 ? '0' : ''}${s}`;
+    }
+
+    function setupProgressBarInteractions() {
+      function seekFromEvent(e) {
+        const rect = progressContainer.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const pos = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+        progressFill.style.width = `${pos * 100}%`;
+        const dur = audio.duration || 0;
+        if (dur > 0) {
+          timeCurrent.textContent = formatTime(pos * dur);
+          if (!isSeeking) {
+            audio.currentTime = pos * dur;
+          }
+        }
+        return pos;
+      }
+
+      progressContainer.addEventListener("click", (e) => {
+        const pos = seekFromEvent(e);
+        const dur = audio.duration || 0;
+        if (dur > 0) {
+          audio.currentTime = pos * dur;
+        }
+      });
+
+      progressContainer.addEventListener("touchstart", (e) => {
+        isSeeking = true;
+        seekFromEvent(e);
+      }, { passive: true });
+
+      window.addEventListener("touchmove", (e) => {
+        if (isSeeking) {
+          seekFromEvent(e);
+        }
+      }, { passive: true });
+
+      window.addEventListener("touchend", () => {
+        if (isSeeking) {
+          isSeeking = false;
+          const dur = audio.duration || 0;
+          const widthPercent = parseFloat(progressFill.style.width) || 0;
+          if (dur > 0) {
+            audio.currentTime = (widthPercent / 100) * dur;
+          }
+        }
+      });
+
+      progressContainer.addEventListener("mousedown", (e) => {
+        isSeeking = true;
+        seekFromEvent(e);
+        const onMouseMove = (ev) => {
+          if (isSeeking) seekFromEvent(ev);
+        };
+        const onMouseUp = () => {
+          if (isSeeking) {
+            isSeeking = false;
+            const dur = audio.duration || 0;
+            const widthPercent = parseFloat(progressFill.style.width) || 0;
+            if (dur > 0) {
+              audio.currentTime = (widthPercent / 100) * dur;
+            }
+          }
+          window.removeEventListener("mousemove", onMouseMove);
+          window.removeEventListener("mouseup", onMouseUp);
+        };
+        window.addEventListener("mousemove", onMouseMove);
+        window.addEventListener("mouseup", onMouseUp);
       });
     }
 
@@ -1071,6 +1236,9 @@
       });
 
       audio.src = t.audio;
+      timeCurrent.textContent = "0:00";
+      timeDuration.textContent = "0:00";
+      progressFill.style.width = "0%";
       if (shouldPlay) {
         audio.play().catch(e => console.log("Auto-play awaiting gesture:", e));
       }
@@ -1105,6 +1273,9 @@
           displayFilename.textContent = fn;
           directUrlBox.textContent = directUrl;
           audio.src = directUrl;
+          timeCurrent.textContent = "0:00";
+          timeDuration.textContent = "0:00";
+          progressFill.style.width = "0%";
           audio.play().catch(e => console.log("Awaiting user gesture:", e));
           addHistory(`AC ${formatBookTitle(currentBookId)} [${l}-${tr}]`);
         } else {
