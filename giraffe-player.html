@@ -411,11 +411,40 @@
     }
     /* Tracklist Drawer */
     .drawer-header {
+      width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
       cursor: pointer;
       user-select: none;
+    }
+    .drawer-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      flex: 1;
+    }
+    .drawer-btn {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--primary);
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      margin-left: auto;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .drawer-header:hover .drawer-btn {
+      background: rgba(245, 158, 11, 0.25);
+      border-color: var(--primary);
     }
     .tracklist-container {
       max-height: 240px;
@@ -628,10 +657,8 @@
     <!-- 5. 當前書籍完整曲目清單 (可摺疊/即時檢索) -->
     <div class="card" style="padding: 12px 16px;">
       <div class="drawer-header" id="drawer-toggle">
-        <div class="label" style="margin: 0;">
-          <span id="tracklist-title">🎵 本書曲目清單 (載入中...)</span>
-          <span id="drawer-arrow" style="font-size: 0.75rem; color: var(--primary);">▼ 展開</span>
-        </div>
+        <span class="drawer-title" id="tracklist-title">🎵 本書曲目清單 (載入中...)</span>
+        <span class="drawer-btn" id="drawer-arrow">▼ 展開</span>
       </div>
       <div id="drawer-content" style="display: none; margin-top: 8px;">
         <input type="text" id="track-search" class="track-search" placeholder="🔍 搜尋曲目關鍵字或編號...">
