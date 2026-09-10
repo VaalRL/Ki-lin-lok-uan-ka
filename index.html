@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#0f172a">
+  <meta name="theme-color" content="#1a130e">
   <title>麒麟鹿player - 全系列教材隨身聽</title>
   
   <!-- Tab Icon (Favicon) & App Icons -->
@@ -24,47 +24,49 @@
         const theme = saved || (prefersLight ? "light" : "dark");
         document.documentElement.setAttribute("data-theme", theme);
         const meta = document.querySelector('meta[name="theme-color"]');
-        if (meta) meta.setAttribute("content", theme === "light" ? "#f8fafc" : "#0f172a");
+        if (meta) meta.setAttribute("content", theme === "light" ? "#fff9f2" : "#1a130e");
       } catch(e) {}
     })();
   </script>
 
   <style>
     :root {
-      --primary: #f59e0b;
-      --primary-hover: #d97706;
-      --bg: #0f172a;
-      --card: #1e293b;
-      --card-border: #334155;
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
-      --accent: #38bdf8;
-      --success: #10b981;
-      --input-bg: #0f172a;
-      --input-text: #f8fafc;
-      --item-hover: #1e293b;
-      --progress-bg: #334155;
-      --link-box-bg: #0f172a;
-      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.35);
+      /* 長頸鹿深邃暖木大地色系 (Giraffe Dark Theme) */
+      --primary: #ff8800; /* 長頸鹿官方標準招牌亮橘 */
+      --primary-hover: #ffa133;
+      --bg: #1a130e; /* 溫潤可可大地黑 */
+      --card: #271e17; /* 深暖木質卡片 */
+      --card-border: #423225; /* 深琥珀斑紋邊框 */
+      --text: #fff6ed; /* 柔和暖奶白字體 */
+      --text-muted: #bda899; /* 駝灰次級文字 */
+      --accent: #38bdf8; /* 長頸鹿活力天藍 */
+      --success: #10b981; /* 翡翠綠 */
+      --input-bg: #1c1510;
+      --input-text: #fff6ed;
+      --item-hover: #38291f;
+      --progress-bg: #423225;
+      --link-box-bg: #1a130e;
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.45);
       --radius: 16px;
     }
 
     [data-theme="light"] {
-      --primary: #d97706;
-      --primary-hover: #b45309;
-      --bg: #f8fafc;
-      --card: #ffffff;
-      --card-border: #e2e8f0;
-      --text: #0f172a;
-      --text-muted: #64748b;
-      --accent: #0284c7;
-      --success: #059669;
-      --input-bg: #f1f5f9;
-      --input-text: #0f172a;
-      --item-hover: #e2e8f0;
-      --progress-bg: #e2e8f0;
-      --link-box-bg: #f8fafc;
-      --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.08);
+      /* 長頸鹿陽光暖橙晨曦色系 (Giraffe Light Theme) */
+      --primary: #ff8800; /* 長頸鹿官方標準招牌亮橘 */
+      --primary-hover: #e65c00;
+      --bg: #fff9f2; /* 長頸鹿品牌溫潤暖奶白 */
+      --card: #ffffff; /* 純白乾淨卡片 */
+      --card-border: #fce2cc; /* 柔和奶橙邊框 */
+      --text: #2c1e14; /* 長頸鹿深焙暖棕黑 */
+      --text-muted: #8c7362; /* 溫潤大地灰棕 */
+      --accent: #0284c7; /* 活力清朗天藍 */
+      --success: #059669; /* 翡翠綠 */
+      --input-bg: #fff3e6; /* 淡淡長頸鹿暖橙底色 */
+      --input-text: #2c1e14;
+      --item-hover: #fde7d4;
+      --progress-bg: #fed7aa; /* 柔和淡橙滑軌 */
+      --link-box-bg: #fff7ed;
+      --shadow: 0 8px 24px -4px rgba(255, 136, 0, 0.12);
     }
     * {
       box-sizing: border-box;
@@ -891,11 +893,11 @@
       if (theme === "light") {
         themeIcon.textContent = "☀️";
         themeToggleBtn.setAttribute("title", "目前為淺色模式，點擊切換為深色模式");
-        if (themeColorMeta) themeColorMeta.setAttribute("content", "#f8fafc");
+        if (themeColorMeta) themeColorMeta.setAttribute("content", "#fff9f2");
       } else {
         themeIcon.textContent = "🌙";
         themeToggleBtn.setAttribute("title", "目前為深色模式，點擊切換為淺色模式");
-        if (themeColorMeta) themeColorMeta.setAttribute("content", "#0f172a");
+        if (themeColorMeta) themeColorMeta.setAttribute("content", "#1a130e");
       }
     }
 
