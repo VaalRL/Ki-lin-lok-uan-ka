@@ -200,13 +200,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background 0.2s, transform 0.1s;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
       flex-shrink: 0;
       margin-top: 18px;
     }
     .play-btn-icon-only:active {
       transform: scale(0.94);
       background: var(--primary-hover);
+    }
+    .play-btn-icon-only.is-playing {
+      background: #10b981;
+      color: #fff;
+      box-shadow: 0 0 14px rgba(16, 185, 129, 0.45);
     }
 
     /* Player Display */
@@ -295,6 +300,11 @@
     .main-play-btn:active {
       transform: scale(0.92);
       background: var(--primary-hover);
+    }
+    .main-play-btn.is-playing {
+      background: #10b981;
+      color: #fff;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.55);
     }
 
     /* OPTIONS BAR: CHECKBOXES + SPEED PILLS */
@@ -620,6 +630,8 @@
     let isLoop = false;
     let isAutoNext = true;
     let playHistory = [];
+    let currentPlayingLesson = "1";
+    let currentPlayingTrack = "1";
 
     // DOM 節點
     const seriesSelect = document.getElementById("series-select");
@@ -632,6 +644,7 @@
     const trackSubcaption = document.getElementById("track-subcaption");
     const lessonInput = document.getElementById("lesson-input");
     const trackInput = document.getElementById("track-input");
+    const playSubmit = document.getElementById("play-submit");
     const displaySeries = document.getElementById("display-series");
     const displayTitle = document.getElementById("display-title");
     const displayFilename = document.getElementById("display-filename");
@@ -699,6 +712,7 @@
     });
 
     // 設定大數字鍵盤與自動跳格
+    // 設定大數字鍵盤與自動跳格
     function setupInputBehaviors() {
       lessonInput.addEventListener("focus", function() { this.select(); });
       trackInput.addEventListener("focus", function() { this.select(); });
@@ -706,6 +720,7 @@
       lessonInput.addEventListener("input", function() {
         const val = this.value.replace(/[^0-9]/g, "");
         this.value = val;
+        onInputEdit();
         if (val.length === 2 || (val.length === 1 && parseInt(val) >= 3)) {
           trackInput.focus();
           trackInput.select();
@@ -722,19 +737,20 @@
 
       trackInput.addEventListener("input", function() {
         this.value = this.value.replace(/[^0-9]/g, "");
+        onInputEdit();
       });
 
       trackInput.addEventListener("keydown", function(e) {
         if (e.key === "Enter") {
           e.preventDefault();
-          submitInputsAndPlay();
+          handlePlaySubmitClick();
         }
       });
 
-      document.getElementById("play-submit").addEventListener("click", submitInputsAndPlay);
+      playSubmit.addEventListener("click", handlePlaySubmitClick);
     }
 
-    // 設定純圖示控制按鈕與 Checkbox
+    // 設定純圖示控制按鈕與 Checkbox (全面同步三大播放按鈕)
     function setupPlaybackControls() {
       // 主播放/暫停鍵
       btnPlayPause.addEventListener("click", () => {
@@ -745,12 +761,12 @@
         }
       });
 
-      // 音訊播放狀態事件同步按鈕圖示
+      // 音訊播放狀態事件：同步全站所有播放按鈕 (輸入格旁、原生播放器、控制列大按鈕)
       audio.addEventListener("play", () => {
-        btnPlayPause.textContent = "⏸";
+        updatePlayButtonsUI(true);
       });
       audio.addEventListener("pause", () => {
-        btnPlayPause.textContent = "▶";
+        updatePlayButtonsUI(false);
       });
 
       // 快退 5 秒 (↺5s)
@@ -806,6 +822,57 @@
           audio.playbackRate = parseFloat(btn.dataset.speed);
         });
       });
+    }
+
+    // 集中同步所有播放按鈕視覺與圖示
+    function updatePlayButtonsUI(isPlaying) {
+      if (isPlaying) {
+        btnPlayPause.textContent = "⏸";
+        btnPlayPause.classList.add("is-playing");
+        btnPlayPause.setAttribute("title", "暫停");
+
+        playSubmit.textContent = "⏸";
+        playSubmit.classList.add("is-playing");
+        playSubmit.setAttribute("title", "暫停播放");
+      } else {
+        btnPlayPause.textContent = "▶";
+        btnPlayPause.classList.remove("is-playing");
+        btnPlayPause.setAttribute("title", "播放");
+
+        playSubmit.textContent = "▶";
+        playSubmit.classList.remove("is-playing");
+        playSubmit.setAttribute("title", "立即播放");
+      }
+    }
+
+    function isInputMatchingCurrentTrack() {
+      if (LESSON_BASED_SERIES.has(currentSeries)) {
+        return lessonInput.value.trim() === currentPlayingLesson && trackInput.value.trim() === currentPlayingTrack;
+      } else {
+        return trackInput.value.trim() === currentPlayingTrack;
+      }
+    }
+
+    function onInputEdit() {
+      if (!isInputMatchingCurrentTrack()) {
+        playSubmit.textContent = "▶";
+        playSubmit.classList.remove("is-playing");
+        playSubmit.setAttribute("title", "播放輸入曲目");
+      } else {
+        updatePlayButtonsUI(!audio.paused);
+      }
+    }
+
+    function handlePlaySubmitClick() {
+      if (isInputMatchingCurrentTrack() && audio.src) {
+        if (audio.paused) {
+          audio.play().catch(e => console.log("Play gesture required:", e));
+        } else {
+          audio.pause();
+        }
+      } else {
+        submitInputsAndPlay();
+      }
     }
 
     // 渲染系列選單
@@ -987,11 +1054,14 @@
       if (LESSON_BASED_SERIES.has(currentSeries)) {
         const match = fn.match(/_(\d+)-(\d+)\.mp3$/);
         if (match) {
+          currentPlayingLesson = match[1];
+          currentPlayingTrack = match[2];
           lessonInput.value = match[1];
           trackInput.value = match[2];
           localStorage.setItem("g_track_combined", `${match[1]}-${match[2]}`);
         }
       } else {
+        currentPlayingTrack = String(idx + 1);
         trackInput.value = `${idx + 1}`;
         localStorage.setItem("g_track_combined", `${idx + 1}`);
       }
@@ -1029,6 +1099,8 @@
           const bNum = parseInt(currentBookId.replace("BOOK", "")) || 1;
           const fn = `AC${bNum}_${l}-${tr}.mp3`;
           const directUrl = `https://geo.giraffe.com.tw/Content/GiraffeMP3/Action/BOOK%20${bNum}/${fn}`;
+          currentPlayingLesson = l;
+          currentPlayingTrack = tr;
           displayTitle.textContent = `${formatBookTitle(currentBookId)} · Lesson ${l} - Track ${tr}`;
           displayFilename.textContent = fn;
           directUrlBox.textContent = directUrl;
