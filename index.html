@@ -1465,6 +1465,11 @@
         playSubmit.classList.remove("is-playing");
         playSubmit.setAttribute("title", "立即播放");
       }
+
+      const activeBookChip = document.querySelector(`.book-chip[data-book="${currentBookId}"]`);
+      if (activeBookChip) {
+        activeBookChip.title = isPlaying ? "點擊暫停當前書籍" : "點擊繼續播放";
+      }
     }
 
     function isInputMatchingCurrentTrack() {
@@ -1557,14 +1562,23 @@
         chip.className = "book-chip";
         chip.dataset.book = bId;
         chip.textContent = formatBookTitle(bId);
+        chip.title = (bId === currentBookId && !audio.paused) ? "點擊暫停當前書籍" : "點擊播放此冊教材";
         chip.addEventListener("click", () => {
-          currentBookId = bId;
-          updateActiveBookChip();
-          loadBookTracks(currentSeries, currentBookId, () => {
-            if (currentTracks.length > 0) {
-              playTrackByIndex(0, true);
+          if (bId === currentBookId && audio.src) {
+            if (audio.paused) {
+              audio.play().catch(e => console.log("Play gesture required:", e));
+            } else {
+              audio.pause();
             }
-          });
+          } else {
+            currentBookId = bId;
+            updateActiveBookChip();
+            loadBookTracks(currentSeries, currentBookId, () => {
+              if (currentTracks.length > 0) {
+                playTrackByIndex(0, true);
+              }
+            });
+          }
         });
         booksCarousel.appendChild(chip);
       });
@@ -1576,7 +1590,13 @@
 
     function updateActiveBookChip() {
       document.querySelectorAll(".book-chip").forEach(chip => {
-        chip.classList.toggle("active", chip.dataset.book === currentBookId);
+        const isActive = chip.dataset.book === currentBookId;
+        chip.classList.toggle("active", isActive);
+        if (isActive) {
+          chip.title = !audio.paused ? "點擊暫停當前書籍" : "點擊繼續播放";
+        } else {
+          chip.title = "點擊播放此冊教材";
+        }
       });
       localStorage.setItem("g_book", currentBookId);
     }
@@ -1662,7 +1682,15 @@
           <span style="font-size:0.72rem; color:var(--text-muted);">${fn}</span>
         `;
         item.addEventListener("click", () => {
-          playTrackByIndex(idx, true);
+          if (idx === currentTrackIndex && audio.src) {
+            if (audio.paused) {
+              audio.play().catch(e => console.log("Play gesture required:", e));
+            } else {
+              audio.pause();
+            }
+          } else {
+            playTrackByIndex(idx, true);
+          }
         });
         tracklistContainer.appendChild(item);
       });
