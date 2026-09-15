@@ -1,26 +1,44 @@
 {
-  "name": "麒麟鹿player",
+  "id": "/Ki-lin-lok-uan-ka/",
+  "name": "麒麟鹿player - 全系列教材隨身聽",
   "short_name": "麒麟鹿player",
   "description": "專為實體英語教材課後複習打造的極簡隨身聽",
+  "lang": "zh-TW",
+  "dir": "ltr",
   "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#1a130e",
   "theme_color": "#1a130e",
+  "orientation": "portrait-primary",
+  "categories": [
+    "education",
+    "music"
+  ],
   "icons": [
     {
       "src": "icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "favicon.svg",
       "sizes": "any",
-      "type": "image/svg+xml"
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ]
 }
