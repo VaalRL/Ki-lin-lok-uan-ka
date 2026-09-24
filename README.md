@@ -12,6 +12,8 @@
 [![Zero Dependencies](https://img.shields.io/badge/Dependencies-0%20(Pure%20Vanilla)-success)](#)
 [![Mobile Optimized](https://img.shields.io/badge/Mobile-iOS%20%2F%20Android-orange)](#)
 
+> **English summary** — Ki-lin-lok player is an unofficial, zero-dependency single-file web app for reviewing Giraffe English (長頸鹿美語) textbook audio after class. Open your printed textbook, type the lesson and track numbers shown on the page (e.g. `3-2`) on a big numeric keypad, and the matching track streams instantly. Features loop / continuous play, 0.8x–1.2x speed, lock-screen & headphone controls (Media Session), shareable deep links, keyboard shortcuts, dark mode, and an installable PWA shell. No audio is hosted in this repository — see the [disclaimer](DISCLAIMER.md).
+
 ---
 
 ## 📖 專案簡介 (Introduction)
@@ -48,10 +50,11 @@
 - 🚀 **進階少兒與青少**：WOW! Big Sky (24 冊)、WOW! Reach Your Goal (24 冊/CD)、Twinkle (30 冊/CD)、Giraffe Leaders (3 冊)。
 - 📖 **自然發音與主題**：Giraffe Phonics (8 冊)、Children's Favorite Stories (9 冊)、My G-Book (8 冊)、KK 音標、My ABC、My 123 等。
 
-### 4. 🔍 雲端曲目清單抽屜
+### 4. 🔍 雲端曲目清單抽屜與最近播放
 - 點擊「▼ 展開曲目清單」，即可瀏覽該本書籍的所有真實歌曲標題（如 `Opening`、`Dialogue`、`Chant` 等）。
 - 內建即時關鍵字搜尋框，點擊任一曲目即刻跳轉播放。
 - 清單來源具備逾時保護與本地快取退路：雲端暫時無回應時會沿用先前快取的清單，Action 系列另有本地推算清單可用。
+- **最近播放歷程**：自動記錄最近 10 筆實際播放過的曲目（系列、冊次、課次），點一下即可回到該曲，也可一鍵清除。
 
 ### 5. 🌗 長頸鹿美語官方品牌色系與深淺雙模式
 - **官方 CI 視覺傳承**：取樣官方標準招牌亮橘（`#ff8800`）、溫暖蜜桃奶白與可可大地深木色調。
@@ -84,9 +87,14 @@
 
 ### 9. ⚡ 零相依單檔架構與離線支援
 - 100% 原生 HTML5 + CSS3 + Vanilla JavaScript。
-- **無任何外部相依套件**（No jQuery, No React, No CDN libraries），單一 HTML 檔約 88KB，首次載入零外部 JS/CSS 請求。
+- **無任何外部相依套件**（No jQuery, No React, No CDN libraries），單一 HTML 檔約 92KB，首次載入零外部 JS/CSS 請求。
 - 內建 Service Worker 快取介面本體，離線時仍可開啟 App；曲目清單會存入瀏覽器快取（30 天），斷網時自動沿用。
 - **音訊本身一律即時串流、從不快取**，離線狀態下可以開啟介面但無法播放。
+
+### 10. ♿ 無障礙與窄螢幕支援
+- 不鎖定頁面縮放（符合 WCAG 1.4.4），可自由雙指放大。
+- 進度條具 `role="slider"` 與完整 ARIA 屬性，曲目、歷程與倍速按鈕皆為可聚焦的原生按鈕並標示目前狀態。
+- 支援 `prefers-reduced-motion` 與 `:focus-visible` 焦點框；320px 寬的小螢幕也不會出現橫向捲動。
 
 ---
 
@@ -101,11 +109,27 @@
    - **Android**：用 Chrome 開啟 ➔ 點擊右上角選單 ➔ 點選 **「加到主螢幕」**。
    - 桌面即會生成一個全螢幕獨立運行的隨身聽圖示！
 
-### 方式 B：單一檔案手機本機執行（100% 離線私密）
+### 方式 B：單一檔案手機本機執行
+
+> 介面可在本機開啟，但音訊與曲目清單仍需連網串流取得；圖示與 PWA 安裝功能僅在方式 A 可用。
 
 1. 直接將本專案中的 `index.html` 透過通訊軟體、AirDrop 或傳輸線放進手機。
 2. **Android**：以檔案管理員開啟 ➔ 選擇「Chrome」瀏覽器開啟。
 3. **iPhone**：儲存至「檔案」後，使用免費的 **Documents by Readdle** 或支援 HTML 檢視的瀏覽工具開啟。
+
+---
+
+## 🗂️ 專案結構 (Project Structure)
+
+| 檔案 | 說明 |
+| :--- | :--- |
+| `index.html` | 應用程式本體（HTML / CSS / JS 全部內嵌），內含唯一生效的書庫常數 `CATALOG` |
+| `sw.js` | Service Worker：只快取 app shell，音訊與跨網域資源一律不攔截 |
+| `manifest.json`、`icon-*.png`、`favicon.*` | PWA 安裝資訊與圖示 |
+| `disclaimer.html` / `DISCLAIMER.md` | 免責聲明（網頁版 / Markdown 版） |
+| `giraffe-player.html` | 舊網址相容用的轉址頁，保留查詢參數導向 `index.html` |
+| `data/giraffe_catalog.json` | 書庫參考資料，執行期不載入；調整系列或冊次時以 `index.html` 為準並同步更新 |
+| `.nojekyll` | 讓 GitHub Pages 直接提供靜態檔，不經 Jekyll 處理 |
 
 ---
 
